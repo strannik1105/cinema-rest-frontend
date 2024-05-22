@@ -56,7 +56,7 @@ export const RoomEdit: React.FC<IResourceComponentsProps> = () => {
                 className="shadow-1"
                 title={
                     <div className="flex justify-content-between align-items-center justify-content-center">
-                        <span className="text-3xl p-card-title">Изменение контента</span>
+                        <span className="text-3xl p-card-title">Изменение комнаты</span>
                         <div className="flex gap-3">
                             <AddNavButton handleClick={() => create("rooms")}/>
                             <ListNavButton handleClick={() => list("rooms")}/>

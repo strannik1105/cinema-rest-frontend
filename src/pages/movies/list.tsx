@@ -7,6 +7,7 @@ import {ColumnMeta} from "@/interfaces/common";
 import {EditIcon, ShowIcon} from "@/components/actions/common";
 import {DatatableView} from "@/components/datatableView";
 import {Card} from "primereact/card";
+import {AddNavButton} from "@/components/navButtons/addNavButton";
 
 
 export const MoviesList: React.FC<IResourceComponentsProps> = () => {
@@ -57,11 +58,23 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
 
     if (movies) {
         return (
-            <Card>
+            <Card
+                className="shadow-1"
+                title={
+                    <div className="flex justify-content-between align-items-center justify-content-center">
+                        <span className="text-3xl p-card-title">Список фильмов</span>
+                        <AddNavButton
+                            handleClick={() => create("movies")}
+                        />
+                    </div>
+                }
+
+            >
+
                 <DatatableView
-                data={movies}
-                columns={columns}
-            />
+                    data={movies}
+                    columns={columns}
+                />
             </Card>
 
         )

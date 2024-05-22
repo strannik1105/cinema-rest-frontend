@@ -61,7 +61,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                 className="shadow-1"
                 title={
                     <div className="flex justify-content-between align-items-center justify-content-center">
-                        <span className="text-3xl p-card-title">Список контента</span>
+                        <span className="text-3xl p-card-title">Список комнат</span>
                         <AddNavButton
                             handleClick={() => create("rooms")}
                         />

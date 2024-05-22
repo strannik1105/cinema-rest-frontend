@@ -20,6 +20,8 @@ import {RoomsList} from "@/pages/rooms/list";
 import {RoomCreate} from "@/pages/rooms/create";
 import {RoomDetail} from "@/pages/rooms/show";
 import {RoomEdit} from "@/pages/rooms/edit";
+import {MovieCreate} from "@/pages/movies/create";
+import {MovieEdit} from "@/pages/movies/edit";
 
 function App() {
     return (
@@ -90,6 +92,10 @@ function App() {
                                            element={<MoviesList/>}/>
                                     <Route path="show/:id"
                                            element={<MovieDetail/>}/>
+                                    <Route path="create"
+                                           element={<MovieCreate/>}/>
+                                    <Route path="edit/:id"
+                                           element={<MovieEdit/>}/>
                                 </Route>
 
                                  <Route path="rooms">
