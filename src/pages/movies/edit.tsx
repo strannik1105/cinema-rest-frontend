@@ -45,8 +45,8 @@ export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
                     <div className="flex justify-content-between align-items-center justify-content-center">
                         <span className="text-3xl p-card-title">Изменение фильма</span>
                         <div className="flex gap-3">
-                            <AddNavButton handleClick={() => create("rooms")}/>
-                            <ListNavButton handleClick={() => list("rooms")}/>
+                            <AddNavButton handleClick={() => create("movies")}/>
+                            <ListNavButton handleClick={() => list("movies")}/>
                         </div>
                     </div>
                 }

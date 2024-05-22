@@ -28,15 +28,6 @@ export const RoomEdit: React.FC<IResourceComponentsProps> = () => {
 
         const data = Object.fromEntries(new FormData(event.target).entries());
 
-        console.log({
-                name: data.name,
-                description: data.description,
-                price: Number(data.price),
-                x: Number(data.x),
-                y: Number(data.y),
-                width: Number(data.width),
-                height: Number(data.height),
-            })
         onFinish({
                 name: data.name,
                 description: data.description,

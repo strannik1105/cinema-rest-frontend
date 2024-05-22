@@ -22,6 +22,8 @@ import {RoomDetail} from "@/pages/rooms/show";
 import {RoomEdit} from "@/pages/rooms/edit";
 import {MovieCreate} from "@/pages/movies/create";
 import {MovieEdit} from "@/pages/movies/edit";
+import {FoodList} from "@/pages/food/list";
+import {FoodCreate} from "@/pages/food/create";
 
 function App() {
     return (
@@ -96,6 +98,14 @@ function App() {
                                            element={<MovieCreate/>}/>
                                     <Route path="edit/:id"
                                            element={<MovieEdit/>}/>
+                                </Route>
+
+                                 <Route path="food">
+                                    <Route index
+                                           element={<FoodList/>}/>
+                                      <Route path="create"
+                                           element={<FoodCreate/>}/>
+
                                 </Route>
 
                                  <Route path="rooms">

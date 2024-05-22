@@ -55,7 +55,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 
-     if (rooms) {
+    if (rooms) {
         return (
             <Card
                 className="shadow-1"
@@ -70,12 +70,23 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
 
             >
                 <DatatableView
-                data={rooms}
-                columns={columns}
-            />
+                    data={rooms}
+                    columns={columns}
+                />
             </Card>
 
         )
     }
-    return <h1>Нет данных</h1>
+    return <Card
+        className="shadow-1"
+        title={
+            <div className="flex justify-content-between align-items-center justify-content-center">
+                <span className="text-3xl p-card-title">Список комнат</span>
+                <AddNavButton
+                    handleClick={() => create("rooms")}
+                />
+            </div>
+        }
+
+    />
 }
