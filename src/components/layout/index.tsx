@@ -1,15 +1,15 @@
-import { PropsWithChildren } from "react";
-import { Breadcrumb } from "../breadcrumb";
-import { Menu } from "../menu";
+import React, {PropsWithChildren} from "react";
+import {Menu} from "../menu";
+import {Breadcrumb} from "../breadcrumb";
 
-export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <div className="layout">
-      <Menu />
-      <div className="content">
-        <Breadcrumb />
-        <div>{children}</div>
-      </div>
-    </div>
-  );
+export const Layout: React.FC<PropsWithChildren> = ({children}) => {
+    return (
+        <div className="min-h-screen surface-ground flex">
+            <Menu/>
+            <div className="p-3 w-full">
+                <Breadcrumb/>
+                {children}
+            </div>
+        </div>
+    );
 };
