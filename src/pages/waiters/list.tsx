@@ -1,16 +1,16 @@
 import React from "react";
 import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
-import {EditIcon, ShowIcon} from "@/components/actions/common";
+import {IWaiter} from "@/interfaces/waiters";
 import {ColumnMeta} from "@/interfaces/common";
+import {IFood} from "@/interfaces/food";
+import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {DatatableView} from "@/components/datatableView";
-import {getFood} from "@/pages/food/service";
-import {IFood} from "@/interfaces/food";
+import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
 
 
-export const FoodList: React.FC<IResourceComponentsProps> = () => {
-
+export const WaitersList: React.FC<IResourceComponentsProps> = () => {
     const {
         tableQueryResult,
         pageCount,
@@ -22,12 +22,12 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
         setPageSize,
         setSorters,
         setFilters,
-    } = useTable<IFood>({
+    } = useTable<IWaiter>({
             syncWithLocation: true,
         }
     )
 
-    const foods = tableQueryResult?.data?.data;
+    const data = tableQueryResult?.data?.data;
 
     const {mutate} = useDelete();
 
@@ -38,55 +38,67 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
             <>
                 <EditIcon
                     icon="pi pi-pencil"
-                    onClick={() => edit("food", rowData.sid)}
+                    onClick={() => edit("waiter", rowData.sid)}
                 />
 
                 <ShowIcon
                     icon="pi pi-eye"
-                    onClick={() => show("food", rowData.sid)}
+                    onClick={() => show("waiter", rowData.sid)}
+                />
+
+                <DeleteIcon
+                    className="bg-red-500 text-0"
+                    icon="pi pi-trash"
+                    onClick={(event) => {
+                        confirmPopup({
+                            target: event.currentTarget,
+                            message: 'Удалить эту запись?',
+                            icon: 'pi pi-info-circle',
+                            defaultFocus: 'reject',
+                            acceptClassName: 'p-button-danger',
+                            accept: () => mutate({resource: "waiter", id: rowData.sid})
+                        })
+                    }}
                 />
             </>
         );
     }
 
-    const food = getFood()
-
     const columns: ColumnMeta[] = [
         {field: "name", header: "Название", filter: true},
-        {field: "description", header: "Описание", filter: false, sortable: false},
-        {field: "price", header: "Цена", filter: true},
+        {field: "surname", header: "Фамилия", filter: false, sortable: false},
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 
-    if (food) {
+
+    if (data) {
         return (
             <Card
                 className="shadow-1"
                 title={
                     <div className="flex justify-content-between align-items-center justify-content-center">
-                        <span className="text-3xl p-card-title">Список еды</span>
+                        <span className="text-3xl p-card-title">Список официантов</span>
                         <AddNavButton
-                            handleClick={() => create("food")}
+                            handleClick={() => create("waiter")}
                         />
                     </div>
                 }
-
             >
+                <ConfirmPopup/>
                 <DatatableView
-                    data={food}
+                    data={data}
                     columns={columns}
                 />
             </Card>
-
         )
     }
     return <Card
         className="shadow-1"
         title={
             <div className="flex justify-content-between align-items-center justify-content-center">
-                <span className="text-3xl p-card-title">Список еды</span>
+                <span className="text-3xl p-card-title">Список официантов</span>
                 <AddNavButton
-                    handleClick={() => create("food")}
+                    handleClick={() => create("waiters")}
                 />
             </div>
         }

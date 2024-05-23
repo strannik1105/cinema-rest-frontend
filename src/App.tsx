@@ -28,6 +28,10 @@ import {BookingList} from "@/pages/booking/list";
 import {MainPage} from "@/pages/main";
 import {Register} from "@/pages/register";
 import {FoodDetail} from "@/pages/food/show";
+import {WaitersList} from "@/pages/waiters/list";
+import {WaiterCreate} from "@/pages/waiters/create";
+import {WaiterDetail} from "@/pages/waiters/show";
+import {WaiterEdit} from "@/pages/waiters/edit";
 
 function App() {
     return (
@@ -90,6 +94,18 @@ function App() {
                                     canDelete: true,
                                 }
                             },
+                            {
+                                name: "waiter",
+                                list: "/waiter/",
+                                show: "waiter/show/:id",
+                                create: "waiter/create",
+                                edit: "waiter/edit/:id",
+                                meta: {
+                                    label: "Официанты",
+                                    icon: <i className="pi-hourglass"/>,
+                                    canDelete: true,
+                                }
+                            },
                         ]}
                     >
                         <Routes>
@@ -103,6 +119,18 @@ function App() {
                                 <Route
                                     index
                                     element={<NavigateToResource resource="page"/>}/>
+
+                                <Route path="waiter">
+                                    <Route index
+                                           element={<WaitersList/>}/>
+                                    <Route path="create"
+                                           element={<WaiterCreate/>}/>
+                                    <Route path="show/:id"
+                                           element={<WaiterDetail/>}/>
+                                    <Route path="edit/:id"
+                                           element={<WaiterEdit/>}/>
+                                </Route>
+
 
                                 <Route path="movies">
                                     <Route index
@@ -150,7 +178,7 @@ function App() {
                     <Route index
                            element={<MainPage/>}/>
                 </Route>
-                 <Route path="register">
+                <Route path="register">
                     <Route index
                            element={<Register/>}/>
                 </Route>
