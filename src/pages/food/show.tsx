@@ -10,7 +10,7 @@ import {useParams} from "react-router-dom";
 export const FoodDetail: React.FC<IResourceComponentsProps> = () => {
 
     const params = useParams();
-
+    // @ts-ignore
     const a = getById(params.id);
 
 

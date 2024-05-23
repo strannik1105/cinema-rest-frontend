@@ -21,6 +21,7 @@ export const MainPage = () => {
             })
     }, [])
 
+    // @ts-ignore
     return (
         <>
             <header className="header">
@@ -62,6 +63,7 @@ export const MainPage = () => {
                             <Layer>
                                 <Text fontSize={15}/>
                                 {
+                                    // @ts-ignore
                                     rooms?.map((el: any) => {
                                         return (
                                             <Rect
