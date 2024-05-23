@@ -1,48 +1,19 @@
-# petite-items-sip
+# cinema-rest-frontend
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+## стэк
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+    JavaScript - язык программирования
+    TypeScript - надстройка над JavaScript для строгой типизации
+    React 18 - библиотека JavaScript
 
-## Getting Started
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
+## запуск
 
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
+Для запуска необходимо выполнить команду:
 
-## Available Scripts
+    docker-compose up --build -d
 
-### Running the development server.
+Сервисы будут подняты и запущены в фоне
 
-```bash
-    npm run dev
-```
-
-### Building for production.
-
-```bash
-    npm run build
-```
-
-### Running the production server.
-
-```bash
-    npm run start
-```
-
-## Learn More
-
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
-
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-- **Custom Auth Provider** [Docs](https://refine.dev/docs/core/providers/auth-provider/)
-
-## License
-
-MIT
+http://localhost:3000/rooms/ - админка
+http://localhost:3000/index - сайт
