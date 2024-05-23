@@ -24,6 +24,10 @@ import {MovieCreate} from "@/pages/movies/create";
 import {MovieEdit} from "@/pages/movies/edit";
 import {FoodList} from "@/pages/food/list";
 import {FoodCreate} from "@/pages/food/create";
+import {BookingList} from "@/pages/booking/list";
+import {MainPage} from "@/pages/main";
+import {Register} from "@/pages/register";
+import {FoodDetail} from "@/pages/food/show";
 
 function App() {
     return (
@@ -64,7 +68,7 @@ function App() {
                                     canDelete: true,
                                 }
                             },
-                             {
+                            {
                                 name: "rooms",
                                 list: "/rooms/",
                                 show: "rooms/show/:id",
@@ -73,6 +77,16 @@ function App() {
                                 meta: {
                                     label: "Комнаты",
                                     icon: <i className="pi pi-map-marker"/>,
+                                    canDelete: true,
+                                }
+                            },
+                            {
+                                name: "booking",
+                                list: "/booking/",
+                                show: "booking/show/:id",
+                                meta: {
+                                    label: "Бронирование",
+                                    icon: <i className="pi pi-address-book"/>,
                                     canDelete: true,
                                 }
                             },
@@ -89,6 +103,7 @@ function App() {
                                 <Route
                                     index
                                     element={<NavigateToResource resource="page"/>}/>
+
                                 <Route path="movies">
                                     <Route index
                                            element={<MoviesList/>}/>
@@ -100,29 +115,51 @@ function App() {
                                            element={<MovieEdit/>}/>
                                 </Route>
 
-                                 <Route path="food">
+                                <Route path="food">
                                     <Route index
                                            element={<FoodList/>}/>
-                                      <Route path="create"
+                                    <Route path="create"
                                            element={<FoodCreate/>}/>
+                                    <Route path="show/:id"
+                                           element={<FoodDetail/>}/>
 
                                 </Route>
 
-                                 <Route path="rooms">
+                                <Route path="rooms">
                                     <Route index
                                            element={<RoomsList/>}/>
                                     <Route path="create"
                                            element={<RoomCreate/>}/>
-                                     <Route path="show/:id"
+                                    <Route path="show/:id"
                                            element={<RoomDetail/>}/>
-                                     <Route path="edit/:id"
+                                    <Route path="edit/:id"
                                            element={<RoomEdit/>}/>
+                                </Route>
+
+                                <Route path="booking">
+                                    <Route index
+                                           element={<BookingList/>}/>
                                 </Route>
                             </Route>
                         </Routes>
                     </Refine>
                 </RefineKbarProvider>
             </PrimeReactProvider>
+            <Routes>
+                <Route path="index">
+                    <Route index
+                           element={<MainPage/>}/>
+                </Route>
+                 <Route path="register">
+                    <Route index
+                           element={<Register/>}/>
+                </Route>
+                <Route path="login">
+                    <Route index
+                           element={<Register/>}/>
+                </Route>
+            </Routes>
+
         </BrowserRouter>
     );
 }

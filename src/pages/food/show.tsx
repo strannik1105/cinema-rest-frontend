@@ -1,24 +1,22 @@
 import React from "react";
-import {IResourceComponentsProps, useNavigation, useShow} from "@refinedev/core";
-import {IMovie} from "@/interfaces/movie";
+import {IResourceComponentsProps, useNavigation} from "@refinedev/core";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
-import {EditNavButton} from "@/components/navButtons/editNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
 import {getById} from "@/pages/food/service";
+import {useParams} from "react-router-dom";
 
 
 export const FoodDetail: React.FC<IResourceComponentsProps> = () => {
-    const {queryResult} = useShow<IMovie>();
-    const {data} = queryResult;
 
-    const a = getById("123");
+    const params = useParams();
 
-    const record = data?.data;
+    const a = getById(params.id);
+
 
     const {list, create} = useNavigation();
 
-    if (record) {
+    if (a) {
         return (
             <Card
                 className="shadow-1"

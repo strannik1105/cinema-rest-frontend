@@ -1,0 +1,56 @@
+
+
+.header {
+    background: #20262b;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.main {
+    margin-top: 100px;
+}
+
+.main__container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.films_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.film_item {
+    border: #20262b 1px dashed;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.film_item img {
+    border-radius: 20px;
+    max-width: 250px
+}
+
+.main__container h1 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.konvajs-content {
+    background: #20262b;
+margin: auto;
+}
+
+.booking_container {
+    margin-top: 30px;
+}
+
+.booking_container h2 {
+    margin-bottom: 20px;
+}
+
+
+

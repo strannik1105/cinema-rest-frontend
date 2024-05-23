@@ -1,13 +1,12 @@
 import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
 import React from "react";
-import {IMovie} from "../../interfaces/movie";
-import {Column} from "primereact/column";
-import {DataTable} from "primereact/datatable";
+import {IMovie} from "@/interfaces/movie";
 import {ColumnMeta} from "@/interfaces/common";
-import {EditIcon, ShowIcon} from "@/components/actions/common";
+import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {DatatableView} from "@/components/datatableView";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
+import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
 
 
 export const MoviesList: React.FC<IResourceComponentsProps> = () => {
@@ -45,6 +44,22 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
                     icon="pi pi-eye"
                     onClick={() => show("movies", rowData.sid)}
                 />
+
+                <DeleteIcon
+                    className="bg-red-500 text-0"
+                    icon="pi pi-trash"
+                    onClick={(event) => {
+                        confirmPopup({
+                            target: event.currentTarget,
+                            message: 'Удалить этот фильм?',
+                            icon: 'pi pi-info-circle',
+                            defaultFocus: 'reject',
+                            acceptClassName: 'p-button-danger',
+                            accept: () => mutate({resource: "movies", id: rowData.sid})
+                        })
+                    }}
+                />
+
             </>
         );
     }
@@ -70,7 +85,7 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
                 }
 
             >
-
+                <ConfirmPopup/>
                 <DatatableView
                     data={movies}
                     columns={columns}

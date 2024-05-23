@@ -2,12 +2,12 @@ import React from "react";
 import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
 import {IRoom} from "@/interfaces/room";
 import {IMovie} from "@/interfaces/movie";
-import {EditIcon, ShowIcon} from "@/components/actions/common";
+import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {ColumnMeta} from "@/interfaces/common";
 import {Card} from "primereact/card";
 import {DatatableView} from "@/components/datatableView";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
-
+import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
 
 export const RoomsList: React.FC<IResourceComponentsProps> = () => {
     const {
@@ -44,6 +44,20 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                     icon="pi pi-eye"
                     onClick={() => show("rooms", rowData.sid)}
                 />
+                <DeleteIcon
+                    className="bg-red-500 text-0"
+                    icon="pi pi-trash"
+                    onClick={(event) => {
+                        confirmPopup({
+                            target: event.currentTarget,
+                            message: 'Удалить этот фильм?',
+                            icon: 'pi pi-info-circle',
+                            defaultFocus: 'reject',
+                            acceptClassName: 'p-button-danger',
+                            accept: () => mutate({resource: "rooms", id: rowData.sid})
+                        })
+                    }}
+                />
             </>
         );
     }
@@ -69,6 +83,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                 }
 
             >
+                <ConfirmPopup/>
                 <DatatableView
                     data={rooms}
                     columns={columns}

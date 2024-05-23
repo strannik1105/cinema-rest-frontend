@@ -1,25 +1,28 @@
 export const productData = [
     {
         sid: "123",
-        name: "блюдо1",
-        description: "Описание",
-        price: 1000
+        name: "Паста карбонара",
+        description: "описание",
+        price: 1000,
+        image: "https://eda.ru/images/RecipePhoto/620x415/pasta-karbonara-pasta-alla-carbonara_50865_photo_56238.webp"
     },
     {
         sid: "456",
-        name: "блюдо2",
+        name: "Салат «Цезарь» с тигровыми креветками",
         description: "Описание",
-        price: 500
+        price: 500,
+        image: "https://www.vremena-goda.ru/upload/iblock/a84/salat_cezar_krevetki_ext.jpg?2021072301"
     },
     {
         sid: "1234",
-        name: "блюдо2",
+        name: "Индейка, запеченная целиком",
         description: "Описание",
-        price: 500
+        price: 10000,
+        image: "https://www.vremena-goda.ru/upload/iblock/84b/indeika_ext.jpg?2021072301"
     },
 ]
 
-export const getData = () => {
+export const getFood = () => {
     return productData
 }
 
