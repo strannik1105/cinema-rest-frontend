@@ -3,7 +3,6 @@ import {RefineKbarProvider} from "@refinedev/kbar";
 import routerBindings, {NavigateToResource} from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
 import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";
-import {authProvider} from "./authProvider";
 import {Layout} from "./components/layout";
 import {ToastContainer} from "react-toastify";
 import {MoviesList} from "@/pages/movies/list";
@@ -32,6 +31,10 @@ import {WaitersList} from "@/pages/waiters/list";
 import {WaiterCreate} from "@/pages/waiters/create";
 import {WaiterDetail} from "@/pages/waiters/show";
 import {WaiterEdit} from "@/pages/waiters/edit";
+import {CookList} from "@/pages/cook/list";
+import {CookEdit} from "@/pages/cook/edit";
+import {CookCreate} from "@/pages/cook/create";
+import {CookDetail} from "@/pages/cook/show";
 
 function App() {
     return (
@@ -102,7 +105,19 @@ function App() {
                                 edit: "waiter/edit/:id",
                                 meta: {
                                     label: "Официанты",
-                                    icon: <i className="pi-hourglass"/>,
+                                    icon: <i className="pi pi-hourglass"/>,
+                                    canDelete: true,
+                                }
+                            },
+                            {
+                                name: "cook",
+                                list: "/cook/",
+                                show: "cook/show/:id",
+                                create: "cook/create",
+                                edit: "cook/edit/:id",
+                                meta: {
+                                    label: "Повара",
+                                    icon: <i className="pi pi-star"/>,
                                     canDelete: true,
                                 }
                             },
@@ -131,6 +146,16 @@ function App() {
                                            element={<WaiterEdit/>}/>
                                 </Route>
 
+                                <Route path="cook">
+                                    <Route index
+                                           element={<CookList/>}/>
+                                    <Route path="create"
+                                           element={<CookCreate/>}/>
+                                    <Route path="show/:id"
+                                           element={<CookDetail/>}/>
+                                    <Route path="edit/:id"
+                                           element={<CookEdit/>}/>
+                                </Route>
 
                                 <Route path="movies">
                                     <Route index
