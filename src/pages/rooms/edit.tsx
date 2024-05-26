@@ -5,6 +5,7 @@ import {IRoom, IRoomForm} from "@/interfaces/room";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
+import {Button} from "primereact/button";
 
 
 export const RoomEdit: React.FC<IResourceComponentsProps> = () => {
@@ -36,7 +37,6 @@ export const RoomEdit: React.FC<IResourceComponentsProps> = () => {
                 y: Number(data.y),
                 width: Number(data.width),
                 height: Number(data.height),
-
             }
         );
     };
@@ -56,52 +56,62 @@ export const RoomEdit: React.FC<IResourceComponentsProps> = () => {
                 }
             >
                 <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" defaultValue={record?.name}/>
+                    <p className="text-field">
+                        <label htmlFor="name">Название</label>
+                        <input type="text" id="name" name="name" defaultValue={record?.name}/>
+                    </p>
+                    <p className="text-field">
+                        <label htmlFor="description">Описание</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            defaultValue={record?.description}
+                        />
+                    </p>
+                    <p className="text-field">
+                        <label htmlFor="cost_per_hour">Цена в час</label>
+                        <input
+                            type="text"
+                            id="cost_per_hour"
+                            name="cost_per_hour"
+                            defaultValue={record?.cost_per_hour}
+                        />
+                    </p>
+                    <p className="text-field">
+                        <label htmlFor="x">X</label>
+                        <input type="text" id="x"
+                               name="x"
+                               defaultValue={record?.x}
+                        />
+                    </p>
 
-                    <label htmlFor="description">Description</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        defaultValue={record?.description}
-                    />
+                    <p className="text-field">
+                        <label htmlFor="y">Y</label>
+                        <input type="text" id="y"
+                               name="y"
+                               pattern="\d*.?\d*"
+                               defaultValue={record?.y}
+                        />
+                    </p>
 
-                    <label htmlFor="cost_per_hour">Price</label>
-                    <input
-                        type="text"
-                        id="cost_per_hour"
-                        name="cost_per_hour"
-                        defaultValue={record?.cost_per_hour}
-                    />
+                    <p className="text-field">
+                        <label htmlFor="width">Ширина</label>
+                        <input type="text" id="width"
+                               name="width"
+                               pattern="\d*.?\d*"
+                               defaultValue={record?.width}
+                        />
+                    </p>
 
-                    <label htmlFor="x">X</label>
-                    <input type="text" id="x"
-                           name="x"
-                           defaultValue={record?.x}
-                    />
-
-                    <label htmlFor="y">Y</label>
-                    <input type="text" id="y"
-                           name="y"
-                           pattern="\d*.?\d*"
-                           defaultValue={record?.y}
-                    />
-
-                    <label htmlFor="width">Width</label>
-                    <input type="text" id="width"
-                           name="width"
-                           pattern="\d*.?\d*"
-                           defaultValue={record?.width}
-                    />
-
-                    <label htmlFor="height">height</label>
-                    <input type="text" id="height"
-                           name="height"
-                           pattern="\d*.?\d*"
-                           defaultValue={record?.height}
-                    />
-
-                    <button type="submit">Submit</button>
+                    <p className="text-field">
+                        <label htmlFor="height">Длина</label>
+                        <input type="text" id="height"
+                               name="height"
+                               pattern="\d*.?\d*"
+                               defaultValue={record?.height}
+                        />
+                    </p>
+                    <Button label="Изменить запись"/>
                 </form>
             </Card>
         );

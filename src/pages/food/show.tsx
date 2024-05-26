@@ -1,22 +1,21 @@
 import React from "react";
-import {IResourceComponentsProps, useNavigation} from "@refinedev/core";
+import {IResourceComponentsProps, useNavigation, useShow} from "@refinedev/core";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
-import {getById} from "@/pages/food/service";
-import {useParams} from "react-router-dom";
+import {IFood} from "@/interfaces/food";
 
 
 export const FoodDetail: React.FC<IResourceComponentsProps> = () => {
 
-    const params = useParams();
-    // @ts-ignore
-    const a = getById(params.id);
+    const {queryResult} = useShow<IFood>();
+    const {data} = queryResult;
 
+    const record = data?.data;
 
     const {list, create} = useNavigation();
 
-    if (a) {
+    if (record) {
         return (
             <Card
                 className="shadow-1"
@@ -30,9 +29,10 @@ export const FoodDetail: React.FC<IResourceComponentsProps> = () => {
                     </div>
                 }
             >
-                <p className="text-lg">Название: {a?.name}</p>
-                <p className="text-lg">Описание: {a?.description}</p>
-                <p className="text-lg">Цена: {a?.price}</p>
+                <p className="text-lg">Название: {record.name}</p>
+                <p className="text-lg">Описание: {record.description}</p>
+                <p className="text-lg">Цена: {record.price}</p>
+                <p className="text-lg">Рецепт: {record.recipe}</p>
 
             </Card>
         )

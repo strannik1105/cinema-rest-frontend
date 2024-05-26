@@ -10,3 +10,9 @@ export interface IMovieForm {
     description: string,
     genre: string
 }
+
+export interface IMovieImage {
+    name: string,
+    file: string,
+    genre: string
+}

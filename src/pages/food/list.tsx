@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
-import {EditIcon, ShowIcon} from "@/components/actions/common";
+import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {ColumnMeta} from "@/interfaces/common";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {DatatableView} from "@/components/datatableView";
 import {getFood} from "@/pages/food/service";
 import {IFood} from "@/interfaces/food";
+import {getMainImage} from "@/pages/food/get_image";
+import {Button} from "primereact/button";
+import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
+import {FoodImage} from "@/pages/main/components/food_image";
 
 
 export const FoodList: React.FC<IResourceComponentsProps> = () => {
@@ -45,20 +49,38 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
                     icon="pi pi-eye"
                     onClick={() => show("food", rowData.sid)}
                 />
+                <DeleteIcon
+                    className="bg-red-500 text-0"
+                    icon="pi pi-trash"
+                    onClick={(event) => {
+                        confirmPopup({
+                            target: event.currentTarget,
+                            message: 'Удалить эту запись?',
+                            icon: 'pi pi-info-circle',
+                            defaultFocus: 'reject',
+                            acceptClassName: 'p-button-danger',
+                            accept: () => mutate({resource: "food", id: rowData.sid})
+                        })
+                    }}
+                />
             </>
         );
     }
 
-    const food = getFood()
+    const imageBodyTemplate = (rowData: IFood) => {
+        return <img src="" alt="" className="shadow-2 border-round" style={{width: '64px'}}/>;
+    }
 
     const columns: ColumnMeta[] = [
+        {field: "image", header: "Картинка", body: FoodImage},
         {field: "name", header: "Название", filter: true},
         {field: "description", header: "Описание", filter: false, sortable: false},
         {field: "price", header: "Цена", filter: true},
+        {field: "recipe", header: "Рецепт", filter: true},
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 
-    if (food) {
+    if (foods) {
         return (
             <Card
                 className="shadow-1"
@@ -72,8 +94,9 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
                 }
 
             >
+                <ConfirmPopup/>
                 <DatatableView
-                    data={food}
+                    data={foods}
                     columns={columns}
                 />
             </Card>

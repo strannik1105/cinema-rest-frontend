@@ -25,7 +25,6 @@ import {FoodList} from "@/pages/food/list";
 import {FoodCreate} from "@/pages/food/create";
 import {BookingList} from "@/pages/booking/list";
 import {MainPage} from "@/pages/main";
-import {Register} from "@/pages/register";
 import {FoodDetail} from "@/pages/food/show";
 import {WaitersList} from "@/pages/waiters/list";
 import {WaiterCreate} from "@/pages/waiters/create";
@@ -35,6 +34,13 @@ import {CookList} from "@/pages/cook/list";
 import {CookEdit} from "@/pages/cook/edit";
 import {CookCreate} from "@/pages/cook/create";
 import {CookDetail} from "@/pages/cook/show";
+import {Register} from "@/pages/main/components/register";
+import {Booking} from "@/pages/main/components/booking";
+import {FoodEdit} from "@/pages/food/edit";
+import {BookingDetail} from "@/pages/booking/show";
+import {BookingEdit} from "@/pages/booking/edit";
+import { Check } from "./pages/main/components/check";
+import {BList} from "@/pages/main/components/list_booking";
 
 function App() {
     return (
@@ -76,6 +82,10 @@ function App() {
                                 }
                             },
                             {
+                                name: "food_images",
+                                show: "/food_images/:id",
+                            },
+                            {
                                 name: "rooms",
                                 list: "/rooms/",
                                 show: "rooms/show/:id",
@@ -91,6 +101,7 @@ function App() {
                                 name: "booking",
                                 list: "/booking/",
                                 show: "booking/show/:id",
+                                edit: "booking/edit/:id",
                                 meta: {
                                     label: "Бронирование",
                                     icon: <i className="pi pi-address-book"/>,
@@ -175,9 +186,9 @@ function App() {
                                            element={<FoodCreate/>}/>
                                     <Route path="show/:id"
                                            element={<FoodDetail/>}/>
-
+                                    <Route path="edit/:id"
+                                           element={<FoodEdit/>}/>
                                 </Route>
-
                                 <Route path="rooms">
                                     <Route index
                                            element={<RoomsList/>}/>
@@ -192,6 +203,10 @@ function App() {
                                 <Route path="booking">
                                     <Route index
                                            element={<BookingList/>}/>
+                                    <Route path="show/:id"
+                                           element={<BookingDetail/>}/>
+                                    <Route path="edit/:id"
+                                           element={<BookingEdit/>}/>
                                 </Route>
                             </Route>
                         </Routes>
@@ -203,13 +218,24 @@ function App() {
                     <Route index
                            element={<MainPage/>}/>
                 </Route>
-                <Route path="register">
+                <Route path="/register">
                     <Route index
                            element={<Register/>}/>
                 </Route>
-                <Route path="login">
+                 <Route path="/booking_rooms">
                     <Route index
-                           element={<Register/>}/>
+                           element={<Booking/>}/>
+                </Route>
+                <Route path="/check">
+                    <Route index
+                           element={<Check/>}/>
+
+                </Route>
+
+                <Route path="/blist">
+                    <Route index
+                           element={<BList/>}/>
+
                 </Route>
             </Routes>
 

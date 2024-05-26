@@ -1,31 +1,14 @@
-import React from "react";
-import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
-import {IMovie} from "@/interfaces/movie";
+import React, {useState} from "react";
+import {IResourceComponentsProps, useNavigation} from "@refinedev/core";
 import {ColumnMeta} from "@/interfaces/common";
 import {Card} from "primereact/card";
-import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {DatatableView} from "@/components/datatableView";
-import {getData} from "@/pages/booking/service";
 import {format} from "date-fns";
+import {EditIcon, ShowIcon} from "@/components/actions/common";
+import {FilterMatchMode} from "primereact/api";
 
 
 export const BookingList: React.FC<IResourceComponentsProps> = () => {
-
-    const {
-        tableQueryResult,
-        pageCount,
-        current,
-        pageSize,
-        sorters,
-        filters,
-        setCurrent,
-        setPageSize,
-        setSorters,
-        setFilters,
-    } = useTable<IMovie>({
-            syncWithLocation: true,
-        }
-    )
 
     const formatDateTime = (value: string) => {
         return format(value, 'dd.MM.yyyy HH:mm:ss')
@@ -35,19 +18,45 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
         return formatDateTime(dateValue)
     }
 
+    // @ts-ignore
+    const bookings = JSON.parse(localStorage.getItem("bookings"));
 
-    const bookings = tableQueryResult?.data?.data;
+    const {edit, show} = useNavigation();
 
-    const {create} = useNavigation();
 
-    const food = getData()
+    const actionBodyTemplate = (rowData: any) => {
+        return (
+            <>
+                <EditIcon
+                    icon="pi pi-pencil"
+                    onClick={() => edit("booking", rowData.id)}
+                />
+
+                <ShowIcon
+                    icon="pi pi-eye"
+                    onClick={() => show("booking", rowData.id)}
+                />
+            </>
+        );
+    }
+
+    const [filters, setFilters] = useState({
+        waiter: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        cook: { value: null, matchMode: FilterMatchMode.EQUALS }
+    });
 
     const columns: ColumnMeta[] = [
-        {field: "datetime_start", header: "Дата начала", filter: false, sortable: false, body: (rowData: any) => dateTemplate(rowData?.datetime_start)},
-        {field: "datetime_end", header: "Дата окончания", filter: false, body: (rowData: any) => dateTemplate(rowData?.datetime_start)},
+        {field: "user", header: "Пользователь", filter: false, sortable: false},
+        {field: "film", header: "Фильм", filter: false, sortable: false},
+        {field: "room", header: "Комната", filter: false, sortable: false},
+        {field: "dateStart", header: "Дата начала", filter: false, sortable: false, body: (rowData: any) => dateTemplate(rowData?.dateStart)},
+        {field: "dateEnd", header: "Дата окончания", filter: false, sortable: false, body: (rowData: any) => dateTemplate(rowData?.dateEnd)},
+        {field: "waiter", header: "Официант", filter: true, sortable: true},
+        {field: "cook", header: "Повар", filter: true, sortable: true},
+        {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 
-    if (food) {
+    if (bookings) {
         return (
             <Card
                 className="shadow-1"
@@ -56,11 +65,11 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
                         <span className="text-3xl p-card-title">Список бронирований</span>
                     </div>
                 }
-
             >
                 <DatatableView
-                    data={food}
+                    data={bookings}
                     columns={columns}
+                    filters={filters}
                 />
             </Card>
 
@@ -70,10 +79,7 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
         className="shadow-1"
         title={
             <div className="flex justify-content-between align-items-center justify-content-center">
-                <span className="text-3xl p-card-title">Список еды</span>
-                <AddNavButton
-                    handleClick={() => create("food")}
-                />
+                <span className="text-3xl p-card-title">Список бронирований</span>
             </div>
         }
 

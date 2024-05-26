@@ -4,6 +4,7 @@ import {IRoom, IRoomForm} from "@/interfaces/room";
 import {Card} from "primereact/card";
 import {InputText} from "primereact/inputtext";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
+import {Button} from "primereact/button";
 
 
 export const RoomCreate: React.FC<IResourceComponentsProps> = () => {
@@ -54,28 +55,42 @@ export const RoomCreate: React.FC<IResourceComponentsProps> = () => {
 
         >
             <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
-                <label htmlFor="name">Name</label>
-                <InputText value={name} onChange={(e) => setName(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="name">Название</label>
+                    <InputText value={name} onChange={(e) => setName(e.target.value)}/>
+                </p>
 
-                <label htmlFor="description">Description</label>
-                <InputText value={description} onChange={(e) => setDescription(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="description">Описание</label>
+                    <InputText value={description} onChange={(e) => setDescription(e.target.value)}/>
+                </p>
 
-                <label htmlFor="price">Price</label>
-                <InputText keyfilter="int" value={cost_per_hour} onChange={(e) => setCost_per_hour(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="price">Цена в час</label>
+                    <InputText keyfilter="int" value={cost_per_hour}
+                               onChange={(e) => setCost_per_hour(e.target.value)}/>
+                </p>
+                <p className="text-field">
+                    <label htmlFor="x">X</label>
+                    <InputText keyfilter="int" value={x} onChange={(e) => setX(e.target.value)}/>
+                </p>
 
-                <label htmlFor="x">X</label>
-               <InputText keyfilter="int" value={x} onChange={(e) => setX(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="y">Y</label>
+                    <InputText keyfilter="int" value={y} onChange={(e) => setY(e.target.value)}/>
+                </p>
 
-                <label htmlFor="y">Y</label>
-                <InputText keyfilter="int" value={y} onChange={(e) => setY(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="width">Ширина</label>
+                    <InputText keyfilter="int" value={width} onChange={(e) => setWidth(e.target.value)}/>
+                </p>
 
-                <label htmlFor="width">width</label>
-                <InputText keyfilter="int" value={width} onChange={(e) => setWidth(e.target.value)} />
+                <p className="text-field">
+                    <label htmlFor="height">Длина</label>
+                    <InputText keyfilter="int" value={height} onChange={(e) => setHeight(e.target.value)}/>
+                </p>
 
-                <label htmlFor="height">height</label>
-                <InputText keyfilter="int" value={height} onChange={(e) => setHeight(e.target.value)} />
-
-                <button type="submit">Submit</button>
+                <Button label="Добавить запись"/>
             </form>
         </Card>
     )

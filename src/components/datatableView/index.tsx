@@ -7,20 +7,22 @@ import {Column} from "primereact/column";
 interface View {
     data: object[],
     columns: ColumnMeta[],
+    filters?: any,
 }
 
 
 export const DatatableView: React.FC<View> = (
     {
         data,
-        columns
+        columns,
+        filters
     }) => {
 
     return (
         <DataTable
             value={data}
-            dataKey="sid"
             lazy
+            filters={filters}
             paginator
             rows={10}
             rowsPerPageOptions={[5, 10, 25, 50]}
@@ -39,7 +41,6 @@ export const DatatableView: React.FC<View> = (
                     dataType={col.dataType}
                 />
             ))}
-
         </DataTable>
     )
 }

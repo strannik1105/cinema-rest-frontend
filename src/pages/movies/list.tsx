@@ -7,6 +7,7 @@ import {DatatableView} from "@/components/datatableView";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
+import {MovieImage} from "@/pages/main/components/movie_image";
 
 
 export const MoviesList: React.FC<IResourceComponentsProps> = () => {
@@ -59,12 +60,12 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
                         })
                     }}
                 />
-
             </>
         );
     }
 
     const columns: ColumnMeta[] = [
+        {field: "", header: "Картинка", filter: false, body: MovieImage},
         {field: "name", header: "Название фильма", filter: true},
         {field: "description", header: "Описание", filter: false, sortable: false},
         {field: "genre", header: "Жанр", filter: true},

@@ -5,6 +5,7 @@ import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
 import {ICook} from "@/interfaces/cook";
+import {Button} from "primereact/button";
 
 
 export const CookEdit: React.FC<IResourceComponentsProps> = () => {
@@ -60,7 +61,7 @@ export const CookEdit: React.FC<IResourceComponentsProps> = () => {
                         defaultValue={record?.surname}
                     />
 
-                    <button type="submit">Submit</button>
+                     <Button label="Изменить запись"/>
                 </form>
             </Card>
         );
