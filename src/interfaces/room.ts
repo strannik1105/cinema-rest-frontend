@@ -8,7 +8,8 @@ export interface IRoom {
     y: number,
     width: number,
     height: number,
-    sid: string
+    sid: string,
+    isDragging?: boolean
 }
 
 export interface IRoomForm {

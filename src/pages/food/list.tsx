@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
 import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {ColumnMeta} from "@/interfaces/common";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {DatatableView} from "@/components/datatableView";
-import {getFood} from "@/pages/food/service";
 import {IFood} from "@/interfaces/food";
-import {getMainImage} from "@/pages/food/get_image";
-import {Button} from "primereact/button";
 import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
 import {FoodImage} from "@/pages/main/components/food_image";
 

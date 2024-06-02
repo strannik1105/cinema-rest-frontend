@@ -48,7 +48,7 @@ function App() {
             <PrimeReactProvider>
                 <RefineKbarProvider>
                     <Refine
-                        dataProvider={dataProvider("http://localhost:8000/api/v1")}
+                        dataProvider={dataProvider("http://localhost:8001/api/v1")}
                         routerProvider={routerBindings}
                         options={{
                             syncWithLocation: true,

@@ -14,6 +14,11 @@ body {
     gap: 30px;
 }
 
+body {
+    background: #50565d;
+    color: white;
+}
+
 .header p {
     font-size: 25px;
     font-weight: 500;
@@ -67,5 +72,74 @@ body {
 .main {
     max-width: 1300px;
     margin: 40px auto;
+}
+
+.film {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 2px solid wheat;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: wheat;
+}
+
+.film img {
+    max-width: 250px;
+    border-radius: 30px;
+}
+
+.film:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+
+.films, .foods {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.more_films {
+    background: #20262b;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.films__container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.food {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border: 2px solid wheat;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.food img {
+    max-width: 250px;
+    border-radius: 30px;
+}
+
+.price {
+    color: wheat;
+    font-size: 30px;
+    font-weight: 700;
 }
 
