@@ -33,7 +33,7 @@ export const MovieCreate: React.FC<IResourceComponentsProps> = () => {
     const onSubmit = (event: any) => {
        event.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/api/v1/movies/", {
+        axios.post("http://127.0.0.1:8001/api/v1/movies/", {
             name: name,
             description: description,
             genre: genre
@@ -53,7 +53,7 @@ export const MovieCreate: React.FC<IResourceComponentsProps> = () => {
         const config = {
             headers: {'content-type': 'multipart/form-data'}
         }
-        axios.post("http://127.0.0.1:8000/api/v1/movies_images/" + sid, formData, config)
+        axios.post("http://127.0.0.1:8001/api/v1/movies_images/" + sid, formData, config)
             .then(resp => setNewSid(resp.data))
     }
 

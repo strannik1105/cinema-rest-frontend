@@ -25,17 +25,17 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
     let a = 0;
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/v1/rooms/" + id)
+        axios.get("http://127.0.0.1:8001/api/v1/rooms/" + id)
             .then(res => {
                 setData(res.data)
             })
 
-        axios.get("http://127.0.0.1:8000/api/v1/food/")
+        axios.get("http://127.0.0.1:8001/api/v1/food/")
             .then(res => {
                 setFoodList(res.data)
             })
 
-        axios.get("http://127.0.0.1:8000/api/v1/movies/")
+        axios.get("http://127.0.0.1:8001/api/v1/movies/")
             .then(res => {
                 setFilms(res.data)
             })
@@ -52,7 +52,32 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
     const [datetime24hStart, setDateTime24hStart] = useState<any>(null);
     const [datetime24hEnd, setDateTime24End] = useState<any>(null);
 
-    const onCheck = () => {
+    const [error, setError] = useState();
+
+    const [tmpId, setTmpSid] = useState();
+
+    const postBook = async () => {
+        const today = new Date(datetime24hStart);
+        const startDay = today.toISOString().slice(0, -1)
+        const today2 = new Date(datetime24hEnd);
+        const endDay = today2.toISOString().slice(0, -1)
+
+        return axios.post("http://127.0.0.1:8001/api/v1/booking/", {
+            room_sid: id,
+            user_sid: "cc859d7c-3fbf-4d89-ad81-1a31bbeebd42",
+            datetime_start: startDay,
+            datetime_end: endDay
+        })
+            .then(data => {
+                setTmpSid(() => data.data.sid)
+                return data.data.sid
+            })
+    }
+
+    const onCheck = async () => {
+        const tmp = await postBook()
+
+        console.log(tmpId)
 
         const obj = {
             user: localStorage.getItem("user"),
@@ -60,7 +85,8 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
             food: selectedFood,
             dateStart: datetime24hStart,
             dateEnd: datetime24hEnd,
-            room: data.name
+            room: data.name,
+            booking_sid: tmp
         }
 
         for (let i = 0; i < selectedFood.length; i++) {
@@ -126,6 +152,8 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
                               hourFormat="24"/>
 
                 </div>
+
+                <h2>{error ? error : ""}</h2>
 
                 <br/>
                 <Button onClick={onCheck} label="Забронировать"/>

@@ -14,7 +14,7 @@ export const Booking = () => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/v1/rooms/")
+        axios.get("http://localhost:8001/api/v1/rooms/")
             .then(data => {
                 setRooms(data.data)
             })

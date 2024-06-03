@@ -1,7 +1,6 @@
-import {HttpError, IResourceComponentsProps, useCreate, useForm} from "@refinedev/core";
-import {IMovie, IMovieForm} from "@/interfaces/movie";
+import {IResourceComponentsProps, useCreate, useForm} from "@refinedev/core";
 import React, {useRef, useState} from "react";
-import {FileUpload, FileUploadUploadEvent} from "primereact/fileupload";
+import {FileUploadUploadEvent} from "primereact/fileupload";
 import {Toast} from "primereact/toast";
 import {InputText} from "primereact/inputtext";
 

@@ -24,7 +24,7 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
     const onSubmit = (event: any) => {
         event.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/api/v1/food/", {
+        axios.post("http://127.0.0.1:8001/api/v1/food/", {
             name: name,
             description: description,
             price: Number(price),
@@ -45,7 +45,7 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
         const config = {
             headers: {'content-type': 'multipart/form-data'}
         }
-         axios.post("http://127.0.0.1:8000/api/v1/food_images/" + sid, formData, config)
+         axios.post("http://127.0.0.1:8001/api/v1/food_images/" + sid, formData, config)
             .then(resp => setNewSid(resp.data))
     }
 

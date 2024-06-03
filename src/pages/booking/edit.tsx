@@ -1,15 +1,25 @@
 import {useParams} from "react-router-dom";
-import {useNavigation} from "@refinedev/core";
+import {useForm, useNavigation} from "@refinedev/core";
 import {Card} from "primereact/card";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
 import React, {useEffect, useState} from "react";
 import {Dropdown} from "primereact/dropdown";
 import axios from "axios";
 import {Button} from "primereact/button";
+import {IFood} from "@/interfaces/food";
 
 
 export const BookingEdit = () => {
     const params = useParams()
+
+    const {
+        queryResult, onFinish
+    } = useForm<any>({
+        resource: "booking",
+        action: "edit",
+        redirect: "list",
+        id: params.id
+    });
     // @ts-ignore
     const bookings = JSON.parse(localStorage.getItem("bookings"))
     const curr_obj = bookings.filter((el: any) => el.id == params.id)
@@ -21,12 +31,12 @@ export const BookingEdit = () => {
     const [selectedCook, setSelectedCook] = useState();
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/v1/cook/")
+        axios.get("http://127.0.0.1:8001/api/v1/cook/")
             .then(res => {
                 setCooks(res.data)
             })
 
-        axios.get("http://127.0.0.1:8000/api/v1/waiter/")
+        axios.get("http://127.0.0.1:8001/api/v1/waiter/")
             .then(res => {
                 setWaiters(res.data)
             })
