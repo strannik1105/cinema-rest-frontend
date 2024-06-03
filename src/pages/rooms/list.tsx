@@ -1,57 +1,17 @@
 import React, {useEffect, useState} from "react";
-import {IResourceComponentsProps, useDelete, useNavigation, useTable} from "@refinedev/core";
-import {IRoom} from "@/interfaces/room";
+import {IResourceComponentsProps, useDelete, useNavigation} from "@refinedev/core";
 import {IMovie} from "@/interfaces/movie";
 import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
 import {ColumnMeta} from "@/interfaces/common";
 import {Card} from "primereact/card";
-import {DatatableView} from "@/components/datatableView";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
-import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup";
 import {Layer, Rect, Stage, Text} from "react-konva";
 import axios from "axios";
 
 export const RoomsList: React.FC<IResourceComponentsProps> = () => {
     const {mutate} = useDelete();
 
-    const {edit, show, create} = useNavigation();
-
-    const actionBodyTemplate = (rowData: IMovie) => {
-        return (
-            <>
-                <EditIcon
-                    icon="pi pi-pencil"
-                    onClick={() => edit("rooms", rowData.sid)}
-                />
-
-                <ShowIcon
-                    icon="pi pi-eye"
-                    onClick={() => show("rooms", rowData.sid)}
-                />
-                <DeleteIcon
-                    className="bg-red-500 text-0"
-                    icon="pi pi-trash"
-                    onClick={(event) => {
-                        confirmPopup({
-                            target: event.currentTarget,
-                            message: 'Удалить этот фильм?',
-                            icon: 'pi pi-info-circle',
-                            defaultFocus: 'reject',
-                            acceptClassName: 'p-button-danger',
-                            accept: () => mutate({resource: "rooms", id: rowData.sid})
-                        })
-                    }}
-                />
-            </>
-        );
-    }
-
-    const columns: ColumnMeta[] = [
-        {field: "name", header: "Название", filter: true},
-        {field: "description", header: "Описание", filter: false, sortable: false},
-        {field: "cost_per_hour", header: "Цена в час", filter: true},
-        {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
-    ]
+    const {create} = useNavigation();
 
     const [rooms, setRooms] = useState<any>();
 
@@ -64,7 +24,6 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
     }, [])
 
     const saveSubmit = () => {
-        console.log(rooms)
         rooms.forEach((el: any) => {
             axios.patch("http://localhost:8001/api/v1/rooms/" + el.sid, el).then(() => console.log("ГОЙДА!!!!!"))
         })

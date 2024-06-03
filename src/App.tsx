@@ -1,7 +1,6 @@
 import {Refine} from "@refinedev/core";
 import {RefineKbarProvider} from "@refinedev/kbar";
 import routerBindings, {NavigateToResource} from "@refinedev/react-router-v6";
-import dataProvider from "@refinedev/simple-rest";
 import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";
 import {Layout} from "./components/layout";
 import {ToastContainer} from "react-toastify";
@@ -41,6 +40,8 @@ import {BookingDetail} from "@/pages/booking/show";
 import {BookingEdit} from "@/pages/booking/edit";
 import { Check } from "./pages/main/components/check";
 import {BList} from "@/pages/main/components/list_booking";
+import {authProvider} from "@/authProvider";
+import {dataProvider} from "@/providers/data-provider";
 
 function App() {
     return (
@@ -49,6 +50,7 @@ function App() {
                 <RefineKbarProvider>
                     <Refine
                         dataProvider={dataProvider("http://localhost:8001/api/v1")}
+                        authProvider={authProvider("http://localhost:8001/api/v1")}
                         routerProvider={routerBindings}
                         options={{
                             syncWithLocation: true,
@@ -129,6 +131,17 @@ function App() {
                                 meta: {
                                     label: "Повара",
                                     icon: <i className="pi pi-star"/>,
+                                    canDelete: true,
+                                }
+                            },
+                            {
+                                name: "users",
+                                list: "/users/",
+                                show: "users/show/:id",
+                                edit: "users/edit/:id",
+                                meta: {
+                                    label: "Пользователи",
+                                    icon: <i className="pi pi-user"/>,
                                     canDelete: true,
                                 }
                             },

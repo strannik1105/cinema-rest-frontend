@@ -1,59 +1,76 @@
-import { AuthBindings } from "@refinedev/core";
+import {AuthProvider, HttpError} from "@refinedev/core";
+import axios from "axios";
 
-export const TOKEN_KEY = "refine-auth";
+const axiosInstance = axios.create();
 
-export const authProvider: AuthBindings = {
-  login: async ({ username, email, password }) => {
-    if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
-      return {
-        success: true,
-        redirectTo: "/",
-      };
-    }
+axiosInstance.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        const customError: HttpError = {
+            ...error,
+            message: error.response?.data?.message,
+            statusCode: error.response?.status,
+        };
+        return Promise.reject(customError);
+    },
+);
 
-    return {
-      success: false,
-      error: {
-        name: "LoginError",
-        message: "Invalid username or password",
-      },
-    };
-  },
-  logout: async () => {
-    localStorage.removeItem(TOKEN_KEY);
-    return {
-      success: true,
-      redirectTo: "/login",
-    };
-  },
-  check: async () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      return {
-        authenticated: true,
-      };
-    }
+export const authProvider = (apiUrl: string): AuthProvider => ({
+    check: async () => {
+        const res = await axiosInstance.get(`${apiUrl}/auth/check`);
 
-    return {
-      authenticated: false,
-      redirectTo: "/login",
-    };
-  },
-  getPermissions: async () => null,
-  getIdentity: async () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      return {
-        id: 1,
-        name: "John Doe",
-        avatar: "https://i.pravatar.cc/300",
-      };
-    }
-    return null;
-  },
-  onError: async (error) => {
-    console.error(error);
-    return { error };
-  },
-};
+        if (res.data === true) {
+            return {authenticated: true}
+        }
+
+        return {
+            authenticated: false,
+            redirectTo: "/login",
+            error: {
+                message: "Check failed",
+                name: "Not authenticated",
+            },
+        }
+    },
+    onError: async (error) => {
+        if (error.response?.status === 401) {
+            return {
+                logout: true,
+            };
+        }
+        return {error};
+    },
+    getIdentity: async () => {
+        const response = await axiosInstance.get(`${apiUrl}/auth/check`);
+
+        if (response.status < 200 || response.status > 299) {
+            return null;
+        }
+    },
+    logout: async () => {
+        return {success: true};
+    },
+    // login method receives an object with all the values you've provided to the useLogin hook.
+    login: async ({username, password}) => {
+        const res = await axiosInstance.post(`${apiUrl}/auth/token?username=${username}&password=${password}`)
+
+        if (res.data) {
+            console.log(res)
+            return {
+                success: true,
+            };
+        }
+        return {
+            success: false,
+            error: {
+                message: "Login failed",
+                name: "Invalid email or password",
+            },
+        };
+    },
+    getPermissions: async () => {
+        throw new Error("Not implemented");
+    },
+});

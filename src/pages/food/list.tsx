@@ -64,10 +64,6 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
         );
     }
 
-    const imageBodyTemplate = (rowData: IFood) => {
-        return <img src="" alt="" className="shadow-2 border-round" style={{width: '64px'}}/>;
-    }
-
     const columns: ColumnMeta[] = [
         {field: "image", header: "Картинка", body: FoodImage},
         {field: "name", header: "Название", filter: true},

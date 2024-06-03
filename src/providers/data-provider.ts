@@ -1,7 +1,5 @@
 import type { DataProvider } from "@refinedev/core";
 
-const API_URL = "https://api.fake-rest.refine.dev";
-
 const fetcher = async (url: string, options?: RequestInit) => fetch(url, {
     ...options,
     headers: {
@@ -9,7 +7,7 @@ const fetcher = async (url: string, options?: RequestInit) => fetch(url, {
     },
 });
 
-export const dataProvider: DataProvider = {
+export const dataProvider  = (API_URL: string): DataProvider => ({
     getList: async ({ resource, pagination, filters, sorters }) => {
         const params = new URLSearchParams();
 
@@ -106,6 +104,19 @@ export const dataProvider: DataProvider = {
         return { data };
     },
     getApiUrl: () => API_URL,
-    deleteOne: () => { throw new Error("Not implemented"); },
+    deleteOne: async ({resource, id, variables}) => {
+        const response = await fetcher(`${API_URL}/${resource}/${id}`, {
+            method: "DELETE",
+            body: JSON.stringify(variables),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+         if (response.status < 200 || response.status > 299) throw response;
+
+        const data = await response.json();
+
+        return { data };
+    },
     /* ... */
-};
+})
