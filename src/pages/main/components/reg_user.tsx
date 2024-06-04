@@ -1,19 +1,21 @@
 import React, {useState} from "react";
-import {InputText} from "primereact/inputtext";
-import {Password} from 'primereact/password';
-import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 import {Header} from "@/pages/main/components/header";
+import {InputText} from "primereact/inputtext";
+import {Password} from "primereact/password";
 import {Button} from "primereact/button";
 
-export const MainLogin = () => {
+
+export const RegUser = () => {
     const [username, setUsername] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const navigate = useNavigate();
 
     const loginUser = async () => {
-        return axios.post(`http://localhost:8001/api/v1/auth/token?username=${username}&password=${password}`)
+        return axios.post(`http://localhost:8001/api/v1/users/`, {name: username, email: email, password: password})
     }
 
     const onSubmit = async (event: any) => {
@@ -36,14 +38,17 @@ export const MainLogin = () => {
                     <label htmlFor="name">Логин</label>
                     <InputText value={username} onChange={(e) => setUsername(e.target.value)}/>
 
+                    <label htmlFor="name">Email</label>
+                    <InputText value={email} onChange={(e) => setEmail(e.target.value)}/>
+
                     <label htmlFor="genre">Пароль</label>
                     <Password value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-                    <Button label="Войти"/>
+                    <Button label="Зарегистрироваться"/>
                 </form>
-                <h2>Нет аккаунта? <Link to="/main_reg">Зарегистрироваться</Link></h2>
+                <h2>Есть аккаунта? <Link to="/main_login">Войти</Link></h2>
             </main>
         </>
 
     )
-};
+}

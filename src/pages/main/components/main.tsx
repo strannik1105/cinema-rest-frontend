@@ -1,13 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import {foods, movies} from "@/pages/main/movies";
+import axios from "axios";
+import {MovieImage} from "@/pages/main/components/movie_image";
+import {Link} from "react-router-dom";
+import {FoodImage} from "@/pages/main/components/food_image";
 
 export const Main = () => {
 
+    const [films, setFilms] = useState<any>();
+    const [foods, setFoods] = useState<any>();
+
+    useEffect(() => {
+        axios.get("http://localhost:8001/api/v1/movies/")
+            .then(data => setFilms(data.data.slice(0, 3)))
+        axios.get("http://localhost:8001/api/v1/food/")
+            .then(data => setFoods(data.data.slice(0, 3)))
+    }, []);
 
     return (
         <div className="main__container">
-
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -42,42 +54,42 @@ export const Main = () => {
 
             <h1 id="movie">Список фильмов</h1>
             <div className="films">
-                {movies.map(el => {
+                {films ? films.map((el: any) => {
                     return (
                         <div className="film animate__bounce animate__delay-2s">
-                            <img src={el.img} alt=""/>
+                            <MovieImage sid={el.sid}/>
                             <div>
                                 <h2>{el.name}</h2>
                                 <p>{el.description}</p>
                             </div>
                         </div>
                     )
-                })}
+                }) : <></>}
 
                 <div className="more_films">
-                    Все фильмы
+                    <Link to="/all_movies">Все фильмы</Link>
                 </div>
             </div>
 
             <h1 id="food">Список блюд</h1>
             <div className="films">
                 <div className="films__container">
-                    {foods.map(el => {
-                    return (
-                        <div className="food">
-                            <img src={el.img} alt=""/>
-                            <div>
-                                <h2>{el.name}</h2>
-                                <p>{el.description}</p>
-                                <p className="price">{el.price}</p>
+                    {foods ? foods.map((el: any) => {
+                        return (
+                            <div className="food">
+                                <FoodImage sid={el.sid}/>
+                                <div>
+                                    <h2>{el.name}</h2>
+                                    <p>{el.description}</p>
+                                    <p className="price">{el.price}</p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    }) : <></>}
                 </div>
 
                 <div className="more_films">
-                    Все блюда
+                     <Link to="/all_foods">Все блюда</Link>
                 </div>
             </div>
 

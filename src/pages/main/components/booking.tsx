@@ -4,6 +4,7 @@ import axios from "axios";
 import {RoomModal} from "@/pages/main/components/room_modal";
 import {Dialog} from "primereact/dialog";
 import {Link} from "react-router-dom";
+import {Header} from "@/pages/main/components/header";
 
 
 export const Booking = () => {
@@ -29,14 +30,7 @@ export const Booking = () => {
 
     return (
         <>
-            <header className="header">
-                <h1><Link to="/index">Кино-ресторан</Link></h1>
-                <p>Каталог фильмов</p>
-                <p>Меню блюд</p>
-                <p>О нас</p>
-                <p><Link to="/main_login">Забронировать</Link></p>
-                <p><Link to="/blist">Мои заказы</Link></p>
-            </header>
+           <Header/>
             <main className="main">
                 <div className="booking_container">
                     <h2>Забронируйте комнату прямо сейчас</h2>

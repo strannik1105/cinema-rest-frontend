@@ -1,10 +1,11 @@
 import React from "react";
 import {IResourceComponentsProps, useForm, useNavigation} from "@refinedev/core";
-import {IWaiter, IWaiterForm} from "@/interfaces/waiters";
+import {IWaiter} from "@/interfaces/waiters";
 import {useParams} from "react-router-dom";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
+import {Button} from "primereact/button";
 
 
 export const WaiterEdit: React.FC<IResourceComponentsProps> = () => {
@@ -61,7 +62,7 @@ export const WaiterEdit: React.FC<IResourceComponentsProps> = () => {
                         defaultValue={record?.surname}
                     />
 
-                    <button type="submit">Submit</button>
+                     <Button label="Изменить запись"/>
                 </form>
             </Card>
         );

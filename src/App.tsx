@@ -44,6 +44,10 @@ import {authProvider} from "@/providers/authProvider";
 import {dataProvider} from "@/providers/data-provider";
 import {UsersList} from "@/pages/users/list";
 import {Login} from "@/pages/login";
+import {RegUser} from "@/pages/main/components/reg_user";
+import {AllMovies} from "@/pages/main/components/all_movies";
+import {AllFoods} from "@/pages/main/components/all_food";
+import {UserEdit} from "@/pages/users/edit";
 
 function App() {
     return (
@@ -231,10 +235,8 @@ function App() {
                                 <Route path="users">
                                     <Route index
                                            element={<UsersList/>}/>
-                                    <Route path="show/:id"
-                                           element={<BookingDetail/>}/>
                                     <Route path="edit/:id"
-                                           element={<BookingEdit/>}/>
+                                           element={<UserEdit/>}/>
                                 </Route>
                             </Route>
                         </Routes>
@@ -246,9 +248,21 @@ function App() {
                     <Route index
                            element={<MainPage/>}/>
                 </Route>
+                 <Route path="all_movies">
+                    <Route index
+                           element={<AllMovies/>}/>
+                </Route>
+                 <Route path="all_foods">
+                    <Route index
+                           element={<AllFoods/>}/>
+                </Route>
                 <Route path="/main_login">
                     <Route index
                            element={<MainLogin/>}/>
+                </Route>
+                 <Route path="/main_reg">
+                    <Route index
+                           element={<RegUser/>}/>
                 </Route>
                 <Route path="/booking_rooms">
                     <Route index
@@ -257,7 +271,6 @@ function App() {
                 <Route path="/check">
                     <Route index
                            element={<Check/>}/>
-
                 </Route>
 
                 <Route path="/blist">

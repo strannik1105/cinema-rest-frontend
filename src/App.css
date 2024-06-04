@@ -6,6 +6,11 @@
     margin-bottom: 1rem;
 }
 
+.more_films a {
+    text-decoration: none;
+    color: white;
+}
+
 /* стили для label */
 .text-field label {
     display: block;
@@ -37,4 +42,13 @@
 
 .p-datatable img {
     max-width: 250px
+}
+
+.konvajs-content {
+   background: url("/схема2.png") no-repeat !important;
+    background-size: 500px;
+}
+
+#sss {
+    position : relative !important;
 }

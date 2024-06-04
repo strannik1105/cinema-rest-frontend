@@ -57,6 +57,9 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
     const [tmpId, setTmpSid] = useState();
 
     const postBook = async () => {
+        // @ts-ignore
+        const user_sid = localStorage.getItem("user_sid");
+        console.log(user_sid)
         const today = new Date(datetime24hStart);
         const startDay = today.toISOString().slice(0, -1)
         const today2 = new Date(datetime24hEnd);
@@ -64,7 +67,7 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
 
         return axios.post("http://127.0.0.1:8001/api/v1/booking/", {
             room_sid: id,
-            user_sid: "cc859d7c-3fbf-4d89-ad81-1a31bbeebd42",
+            user_sid: user_sid,
             datetime_start: startDay,
             datetime_end: endDay
         })

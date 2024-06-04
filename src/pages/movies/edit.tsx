@@ -5,6 +5,7 @@ import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
 import {IMovie} from "@/interfaces/movie";
+import {Button} from "primereact/button";
 
 
 export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
@@ -69,9 +70,7 @@ export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
                         name="genre"
                         defaultValue={record?.genre}
                     />
-
-
-                    <button type="submit">Submit</button>
+                    <Button label="Изменить запись"/>
                 </form>
             </Card>
         );

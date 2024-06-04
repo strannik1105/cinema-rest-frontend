@@ -30,8 +30,8 @@ export const WaiterDetail: React.FC<IResourceComponentsProps> = () => {
                     </div>
                 }
             >
-                <p className="text-lg">Название: {record.name}</p>
-                <p className="text-lg">Описание: {record.surname}</p>
+                <p className="text-lg">Имя: {record.name}</p>
+                <p className="text-lg">Фамилия: {record.surname}</p>
 
             </Card>
         )

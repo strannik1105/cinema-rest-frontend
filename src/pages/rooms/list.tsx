@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {IResourceComponentsProps, useDelete, useNavigation} from "@refinedev/core";
-import {IMovie} from "@/interfaces/movie";
-import {DeleteIcon, EditIcon, ShowIcon} from "@/components/actions/common";
-import {ColumnMeta} from "@/interfaces/common";
+import {IResourceComponentsProps, useNavigation} from "@refinedev/core";
 import {Card} from "primereact/card";
 import {AddNavButton} from "@/components/navButtons/addNavButton";
 import {Layer, Rect, Stage, Text} from "react-konva";
 import axios from "axios";
+import {EditNavButton} from "@/components/navButtons/editNavButton";
+import Konva from "konva";
+import Label = Konva.Label;
 
 export const RoomsList: React.FC<IResourceComponentsProps> = () => {
-    const {mutate} = useDelete();
-
     const {create} = useNavigation();
 
     const [rooms, setRooms] = useState<any>();
@@ -29,8 +27,26 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
         })
     }
 
-    if (rooms) {
+    const onRoomDragStart = (e: any) => {
+        console.log(e)
+        const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
+        a.isDragging = true;
+         setX(e.target.x())
+        setY(e.target.y())
+    }
 
+    const [x, setX] = useState<any>()
+    const [y, setY] = useState<any>()
+
+    const onRoomDragEnd = (e: any) => {
+        const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
+        a.isDragging = false;
+        a.x = e.target.x();
+        a.y = e.target.y();
+        setRooms(rooms);
+    }
+
+    if (rooms) {
         return (
             <Card
                 className="shadow-1"
@@ -42,41 +58,51 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                         />
                     </div>
                 }
-
             >
 
                 <Stage width={500} height={500}>
                     <Layer>
-                        <Text fontSize={15}/>
                         {
                             rooms?.map((el: any) => {
                                 return (
-                                    <div id={el.sid}>
+                                    <div
+                                        id={el.sid}
+                                        draggable
+                                        onDragStart={(e) => {
+                                            // @ts-ignore
+                                            const a = rooms.find((el: any) => el.sid == e.target.attrs.id)
+                                            a.isDragging = true;
+
+                                        }}
+                                        onDragEnd={(e) => {
+                                            // @ts-ignore
+                                            const a = rooms.find((el: any) => el.sid == e.target.attrs.id)
+                                            // @ts-ignore
+                                            a.x = e.evt.layerX - 15;
+                                            // @ts-ignore
+                                            a.y = e.evt.layerY - 30;
+                                            a.isDragging = false;
+                                            setRooms(rooms);
+                                        }}
+                                    >
                                         <Rect
-                                            text='container'
+                                            fillPriority={"asd"}
+                                            text='123'
                                             draggable
                                             x={el.x}
                                             y={el.y}
                                             width={100}
                                             height={100}
-                                            fill="red"
-                                            shadowBlur={10}
-                                            onDragStart={(e) => {
-                                                const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
-                                                a.isDragging = true;
-
-                                            }}
-                                            onDragEnd={(e) => {
-                                                const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
-                                                a.isDragging = false;
-                                                a.x = e.target.x();
-                                                a.y = e.target.y();
-                                                setRooms(rooms);
-                                            }}
+                                            fill="#d92929"
+                                            opacity={0.4}
+                                            onDragStart={(e) => onRoomDragStart(e)}
+                                            onDragEnd={(e) => onRoomDragEnd(e)}
                                         />
                                         <Text text={el.name} fontSize={15} x={el.x + 10}
                                               y={el.y + 25} width={100}
-                                              height={100}/>
+                                              height={100}
+
+                                        />
                                     </div>
 
                                 )
@@ -84,7 +110,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                         }
                     </Layer>
                 </Stage>
-                 <AddNavButton
+                <EditNavButton
                     handleClick={() => saveSubmit()}
                 />
             </Card>
