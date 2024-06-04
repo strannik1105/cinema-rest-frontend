@@ -1,7 +1,6 @@
 import {Layer, Rect, Stage, Text} from "react-konva";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Header} from "@/pages/main/components/header";
 import {RoomModal} from "@/pages/main/components/room_modal";
 import {Dialog} from "primereact/dialog";
 import {Link} from "react-router-dom";
@@ -35,7 +34,7 @@ export const Booking = () => {
                 <p>Каталог фильмов</p>
                 <p>Меню блюд</p>
                 <p>О нас</p>
-                <p><Link to="/register">Забронировать</Link></p>
+                <p><Link to="/main_login">Забронировать</Link></p>
                 <p><Link to="/blist">Мои заказы</Link></p>
             </header>
             <main className="main">

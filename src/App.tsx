@@ -1,4 +1,4 @@
-import {Refine} from "@refinedev/core";
+import {Authenticated, Refine} from "@refinedev/core";
 import {RefineKbarProvider} from "@refinedev/kbar";
 import routerBindings, {NavigateToResource} from "@refinedev/react-router-v6";
 import {BrowserRouter, Outlet, Route, Routes} from "react-router-dom";
@@ -33,15 +33,17 @@ import {CookList} from "@/pages/cook/list";
 import {CookEdit} from "@/pages/cook/edit";
 import {CookCreate} from "@/pages/cook/create";
 import {CookDetail} from "@/pages/cook/show";
-import {Register} from "@/pages/main/components/register";
+import {MainLogin} from "@/pages/main/components/register";
 import {Booking} from "@/pages/main/components/booking";
 import {FoodEdit} from "@/pages/food/edit";
 import {BookingDetail} from "@/pages/booking/show";
 import {BookingEdit} from "@/pages/booking/edit";
-import { Check } from "./pages/main/components/check";
+import {Check} from "./pages/main/components/check";
 import {BList} from "@/pages/main/components/list_booking";
-import {authProvider} from "@/authProvider";
+import {authProvider} from "@/providers/authProvider";
 import {dataProvider} from "@/providers/data-provider";
+import {UsersList} from "@/pages/users/list";
+import {Login} from "@/pages/login";
 
 function App() {
     return (
@@ -150,10 +152,15 @@ function App() {
                         <Routes>
                             <Route
                                 element={
-                                    <Layout>
-                                        <ToastContainer/>
-                                        <Outlet/>
-                                    </Layout>
+                                    <Authenticated
+                                        key="authenticated-routes"
+                                        fallback={<Login/>}
+                                    >
+                                        <Layout>
+                                            <ToastContainer/>
+                                            <Outlet/>
+                                        </Layout>
+                                    </Authenticated>
                                 }>
                                 <Route
                                     index
@@ -221,6 +228,14 @@ function App() {
                                     <Route path="edit/:id"
                                            element={<BookingEdit/>}/>
                                 </Route>
+                                <Route path="users">
+                                    <Route index
+                                           element={<UsersList/>}/>
+                                    <Route path="show/:id"
+                                           element={<BookingDetail/>}/>
+                                    <Route path="edit/:id"
+                                           element={<BookingEdit/>}/>
+                                </Route>
                             </Route>
                         </Routes>
                     </Refine>
@@ -231,11 +246,11 @@ function App() {
                     <Route index
                            element={<MainPage/>}/>
                 </Route>
-                <Route path="/register">
+                <Route path="/main_login">
                     <Route index
-                           element={<Register/>}/>
+                           element={<MainLogin/>}/>
                 </Route>
-                 <Route path="/booking_rooms">
+                <Route path="/booking_rooms">
                     <Route index
                            element={<Booking/>}/>
                 </Route>

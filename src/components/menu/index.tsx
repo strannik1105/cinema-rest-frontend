@@ -11,19 +11,37 @@ export const Menu = () => {
     const {menuItems} = useMenu();
     const [visible, setVisible] = useState(false);
 
+    const userRole = localStorage.getItem("user_role")
     const items: MenuItem[] = menuItems.map((menuItem) => ({
+
         label: menuItem.label,
         icon: menuItem.icon,
         template: (item, options) => {
-            return (
-                <Link
-                    to={menuItem.route ?? "/"}
-                    className="flex align-items-center px-3 py-2 cursor-pointer no-underline text-color"
-                >
-                    {item.icon}
-                    <span className={`mx-2 ${item.items && 'font-semibold'}`}>{item.label}</span>
-                </Link>
-            );
+
+            if (userRole === "1") {
+                if (item.label != "Пользователи" && item.label != "Фильмы") {
+                    return (
+                        <Link
+                            to={menuItem.route ?? "/"}
+                            className="flex align-items-center px-3 py-2 cursor-pointer no-underline text-color"
+                        >
+                            {item.icon}
+                            <span className={`mx-2 ${item.items && 'font-semibold'}`}>{item.label}</span>
+                        </Link>
+                    );
+                }
+            } else {
+                return (
+                        <Link
+                            to={menuItem.route ?? "/"}
+                            className="flex align-items-center px-3 py-2 cursor-pointer no-underline text-color"
+                        >
+                            {item.icon}
+                            <span className={`mx-2 ${item.items && 'font-semibold'}`}>{item.label}</span>
+                        </Link>
+                    );
+            }
+
         },
     }));
 

@@ -36,9 +36,6 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
         return formatDateTime(dateValue)
     }
 
-    // @ts-ignore
-    const bookings = JSON.parse(localStorage.getItem("bookings"));
-
     const {edit, show} = useNavigation();
 
     const [waiters, setWaiters] = useState<any>();
@@ -98,8 +95,11 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
 
     const userBodyTemplate = (rowData: any) => {
         if (users) {
-            const cookName = users.find((el: any) => el.sid === rowData.user_sid)
-            return <>{`${cookName.name}`}</>
+             // @ts-ignore
+            const bookings = JSON.parse(localStorage.getItem("bookings"));
+            const obj = bookings.find((el: any) => el.booking_sid == rowData.sid);
+
+            return obj.user
         }
     }
 
@@ -138,7 +138,6 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
     const actionBodyTemplate = (rowData: any) => {
         return (
             <>
-
                 <ShowIcon
                     icon="pi pi-eye"
                     onClick={() => show("booking", rowData.sid)}

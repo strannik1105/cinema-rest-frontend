@@ -59,7 +59,7 @@ export const Main = () => {
                 </div>
             </div>
 
-            <h1>Список блюд</h1>
+            <h1 id="food">Список блюд</h1>
             <div className="films">
                 <div className="films__container">
                     {foods.map(el => {

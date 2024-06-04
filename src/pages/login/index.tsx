@@ -1,26 +1,40 @@
-import { AuthPage } from "@refinedev/core";
+import React from "react";
+import {useLogin} from "@refinedev/core";
 
 export const Login = () => {
-  return (
-    <AuthPage
-      type="login"
-      renderContent={(content) => (
+    const {mutate, isLoading} = useLogin();
+
+    const onSubmit = (event: any) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(event.target).entries());
+        mutate(data);
+    };
+
+    return (
         <div>
-          <p
-            style={{
-              padding: 10,
-              color: "#004085",
-              backgroundColor: "#cce5ff",
-              borderColor: "#b8daff",
-              textAlign: "center",
-            }}
-          >
-            email: demo@refine.dev
-            <br /> password: demodemo
-          </p>
-          {content}
+            <h1>Login</h1>
+            <form onSubmit={onSubmit}>
+                <label htmlFor="username">username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                />
+
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                />
+
+                {isLoading && <span>loading...</span>}
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                >Submit
+                </button>
+            </form>
         </div>
-      )}
-    />
-  );
+    );
 };

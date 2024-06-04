@@ -1,11 +1,16 @@
-import type { DataProvider } from "@refinedev/core";
+import type {DataProvider, HttpError} from "@refinedev/core";
+import axios from "axios";
+
 
 const fetcher = async (url: string, options?: RequestInit) => fetch(url, {
     ...options,
     headers: {
         ...options?.headers,
+        // @ts-ignore
+        Authorization: localStorage.getItem("booking_access_token"),
     },
 });
+
 
 export const dataProvider  = (API_URL: string): DataProvider => ({
     getList: async ({ resource, pagination, filters, sorters }) => {

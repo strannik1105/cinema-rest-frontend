@@ -9,7 +9,7 @@ export const Header = () => {
             <p><a href="#movie">Каталог фильмов</a></p>
             <p><a href="#food">Меню блюд</a></p>
             <p><a href="#about">О нас</a></p>
-            <p><Link to="/register">Забронировать</Link></p>
+            <p><Link to="/main_login">Забронировать</Link></p>
         </header>
     )
 }

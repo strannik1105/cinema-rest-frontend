@@ -72,52 +72,56 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
                 setTmpSid(() => data.data.sid)
                 return data.data.sid
             })
+            .catch(err => {
+                setError(err.response.data.detail)
+                return err.response.data
+            })
     }
 
     const onCheck = async () => {
         const tmp = await postBook()
+        if (typeof tmp === "string") {
+            const obj = {
+                user: localStorage.getItem("user"),
+                film: selectedFilm.name,
+                food: selectedFood,
+                dateStart: datetime24hStart,
+                dateEnd: datetime24hEnd,
+                room: data.name,
+                booking_sid: tmp
+            }
 
-        console.log(tmpId)
+            for (let i = 0; i < selectedFood.length; i++) {
+                const d = foodList.filter((el: any) => el.sid == selectedFood[i].code)
+                a += d[0].price
+            }
 
-        const obj = {
-            user: localStorage.getItem("user"),
-            film: selectedFilm.name,
-            food: selectedFood,
-            dateStart: datetime24hStart,
-            dateEnd: datetime24hEnd,
-            room: data.name,
-            booking_sid: tmp
-        }
+            const timeDiff = Math.abs(datetime24hEnd.getTime() - datetime24hStart.getTime());
+            const diffH = Math.ceil(timeDiff / (1000 * 3600));
 
-        for (let i = 0; i < selectedFood.length; i++) {
-            const d = foodList.filter((el: any) => el.sid == selectedFood[i].code)
-            a += d[0].price
-        }
+            a += diffH * data.cost_per_hour;
 
-        const timeDiff = Math.abs(datetime24hEnd.getTime() - datetime24hStart.getTime());
-        const diffH = Math.ceil(timeDiff / (1000 * 3600));
+            localStorage.setItem('totalPrice', String(a));
 
-        a += diffH * data.cost_per_hour;
-
-        localStorage.setItem('totalPrice', String(a));
-
-        // @ts-ignore
-        const bookings = JSON.parse(localStorage.getItem("bookings"));
-
-        if (bookings !== null) {
-            const lastObj = bookings.at(-1)
-            const maxId = lastObj.id
             // @ts-ignore
-            obj.id = maxId + 1;
-            bookings.push(obj);
+            const bookings = JSON.parse(localStorage.getItem("bookings"));
 
-            localStorage.setItem('bookings', JSON.stringify(bookings));
-        } else {
-            // @ts-ignore
-            obj.id = 1;
-            localStorage.setItem('bookings', JSON.stringify([obj]));
+            if (bookings !== null) {
+                const lastObj = bookings.at(-1)
+                const maxId = lastObj.id
+                // @ts-ignore
+                obj.id = maxId + 1;
+                bookings.push(obj);
+
+                localStorage.setItem('bookings', JSON.stringify(bookings));
+            } else {
+                // @ts-ignore
+                obj.id = 1;
+                localStorage.setItem('bookings', JSON.stringify([obj]));
+            }
+
+            navigate("/check")
         }
-        navigate("/check")
     }
 
     if (data) {

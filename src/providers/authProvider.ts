@@ -19,9 +19,9 @@ axiosInstance.interceptors.response.use(
 
 export const authProvider = (apiUrl: string): AuthProvider => ({
     check: async () => {
-        const res = await axiosInstance.get(`${apiUrl}/auth/check`);
+        const a = localStorage.getItem("booking_access_token")
 
-        if (res.data === true) {
+        if (a) {
             return {authenticated: true}
         }
 
@@ -55,9 +55,11 @@ export const authProvider = (apiUrl: string): AuthProvider => ({
     // login method receives an object with all the values you've provided to the useLogin hook.
     login: async ({username, password}) => {
         const res = await axiosInstance.post(`${apiUrl}/auth/token?username=${username}&password=${password}`)
+        console.log(res)
 
         if (res.data) {
-            console.log(res)
+            localStorage.setItem("booking_access_token", res.data.access_token)
+            localStorage.setItem("user_role", res.data.user_role)
             return {
                 success: true,
             };
