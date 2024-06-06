@@ -29,7 +29,9 @@ export const BList = () => {
         if (foods) {
             // @ts-ignore
             const bookings = JSON.parse(localStorage.getItem("bookings"));
+
             const foodObj = bookings.find((el: any) => el.booking_sid == rowData.sid);
+            console.log(rowData)
             let res = "";
             foodObj.food.forEach((el: any) => {
                 res += el.name
