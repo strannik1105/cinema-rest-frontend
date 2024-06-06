@@ -75,7 +75,7 @@ export const UserEdit = () => {
                         <Dropdown id="role" name="role" value={selectedCity}
                                   onChange={(e) => setSelectedCity(e.value)} options={roles}
                                   optionLabel="name"
-                                  placeholder="Select a City" className="w-full md:w-14rem"/>
+                                  placeholder="Выберите роль" className="w-full md:w-14rem"/>
                     </p>
 
                     <Button label="Изменить запись"/>

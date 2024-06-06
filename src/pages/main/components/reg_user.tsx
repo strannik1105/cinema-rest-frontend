@@ -15,7 +15,7 @@ export const RegUser = () => {
     const navigate = useNavigate();
 
     const loginUser = async () => {
-        return axios.post(`http://localhost:8001/api/v1/users/`, {name: username, email: email, password: password})
+        return axios.post(`http://localhost:8001/api/v1/users/`, {name: username, email: email, password: password, role: "0"})
     }
 
     const onSubmit = async (event: any) => {

@@ -16,7 +16,7 @@ export const BookingDetail: React.FC<IResourceComponentsProps> = () => {
     const params = useParams()
     // @ts-ignore
     const bookings = JSON.parse(localStorage.getItem("bookings"))
-    const curr_obj = bookings.filter((el: any) => el.id == params.id)
+    const curr_obj = bookings.filter((el: any) => el.booking_sid == params.id)
 
     const {list} = useNavigation();
 
@@ -34,6 +34,7 @@ export const BookingDetail: React.FC<IResourceComponentsProps> = () => {
 
     const [waiter, setWaiter] = useState<any>();
     const [cook, setCook] = useState<any>();
+    const [food, setFood] = useState<any>([]);
 
     const getWaiter = (waiter_sid: string) => {
         axios.get("http://localhost:8001/api/v1/waiter/" + waiter_sid)
@@ -49,8 +50,26 @@ export const BookingDetail: React.FC<IResourceComponentsProps> = () => {
             })
     }
 
+    useEffect(() => {
+        curr_obj[0].food.forEach((el: any) => {
+            axios.get("http://localhost:8001/api/v1/food/" + el.code)
+                .then(data => {
+                    food.push(data.data)
+                })
+        })
+    }, []);
+
+
     getWaiter(record?.waiter_sid)
     getCook(record?.cook_sid)
+
+    const displayFood = (foodObj: any) => {
+        let res = "";
+        for (let i = 0; i < foodObj.length / 2; i++) {
+            res += `${foodObj[i].name} ${foodObj[i].recipe}; \n`
+        }
+        return res;
+    }
 
     if (record) {
         return (
@@ -65,16 +84,14 @@ export const BookingDetail: React.FC<IResourceComponentsProps> = () => {
                     </div>
                 }
             >
-                <p className="text-lg">Пользователь: {a.user}</p>
-                <p className="text-lg">Фильм: {a.film}</p>
-                <p className="text-lg">Комната: {a.room}</p>
+                <p className="text-lg">Пользователь: {curr_obj[0].user}</p>
+                <p className="text-lg">Фильм: {curr_obj[0].film}</p>
+                <p className="text-lg">Комната: {curr_obj[0].room}</p>
                 <p className="text-lg">Дата начала: {dateTemplate(record.datetime_start)}</p>
                 <p className="text-lg">Дата окончания: {dateTemplate(record.datetime_end)}</p>
                 <p className="text-lg">Официант: {waiter}</p>
                 <p className="text-lg">Повар: {cook}</p>
-                <p className="text-lg">Еда: {a.food.map((el: any) => {
-                    return (<p>{el.name}</p>)
-                })}</p>
+                <p className="text-lg">Заказ: {displayFood(food)}</p>
             </Card>
         )
     }

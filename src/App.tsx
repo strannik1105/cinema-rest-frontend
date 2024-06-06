@@ -48,6 +48,7 @@ import {RegUser} from "@/pages/main/components/reg_user";
 import {AllMovies} from "@/pages/main/components/all_movies";
 import {AllFoods} from "@/pages/main/components/all_food";
 import {UserEdit} from "@/pages/users/edit";
+import {UserCreate} from "@/pages/users/create";
 
 function App() {
     return (
@@ -145,6 +146,7 @@ function App() {
                                 list: "/users/",
                                 show: "users/show/:id",
                                 edit: "users/edit/:id",
+                                create: "users/create",
                                 meta: {
                                     label: "Пользователи",
                                     icon: <i className="pi pi-user"/>,
@@ -237,6 +239,8 @@ function App() {
                                            element={<UsersList/>}/>
                                     <Route path="edit/:id"
                                            element={<UserEdit/>}/>
+                                    <Route path="create"
+                                           element={<UserCreate/>}/>
                                 </Route>
                             </Route>
                         </Routes>

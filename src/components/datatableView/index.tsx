@@ -18,10 +18,11 @@ export const DatatableView: React.FC<View> = (
         filters
     }) => {
 
+    console.log(data)
+
     return (
         <DataTable
             value={data}
-            lazy
             filters={filters}
             paginator
             rows={10}

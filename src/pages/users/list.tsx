@@ -67,7 +67,7 @@ export const UsersList: React.FC<IResourceComponentsProps> = () => {
                     <div className="flex justify-content-between align-items-center justify-content-center">
                         <span className="text-3xl p-card-title">Список пользователей</span>
                         <AddNavButton
-                            handleClick={() => create("food")}
+                            handleClick={() => create("users")}
                         />
                     </div>
                 }

@@ -31,9 +31,6 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
             recipe: recipe
         })
             .then(resp => upload(resp.data.sid))
-
-        console.log(localStorage.getItem("newId"))
-
         navigate("/food/")
     }
 
@@ -53,7 +50,6 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
         // @ts-ignore
         setImage(e?.target?.files[0])
     }
-
 
     return (
         <Card

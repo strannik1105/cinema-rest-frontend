@@ -16,14 +16,6 @@ export const dataProvider  = (API_URL: string): DataProvider => ({
     getList: async ({ resource, pagination, filters, sorters }) => {
         const params = new URLSearchParams();
 
-        if (pagination) {
-            if (pagination?.current && pagination?.pageSize) {
-                params.append("_start", ((pagination?.current - 1) * pagination?.pageSize).toString());
-                params.append("_end", (pagination.current * pagination.pageSize).toString());
-            }
-
-        }
-
         if (sorters && sorters.length > 0) {
             params.append("_sort", sorters.map((sorter) => sorter.field).join(","));
             params.append("_order", sorters.map((sorter) => sorter.order).join(","));
