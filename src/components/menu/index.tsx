@@ -1,5 +1,5 @@
 import {useMenu} from "@refinedev/core";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {MenuItem} from "primereact/menuitem";
 import React, {useState} from "react";
 import {Card} from "primereact/card";
@@ -11,14 +11,21 @@ export const Menu = () => {
     const {menuItems} = useMenu();
     const [visible, setVisible] = useState(false);
 
+    const navigate = useNavigate();
+
+    const logotClick = () => {
+        localStorage.removeItem("booking_access_token")
+        window.location.reload();
+        navigate("/")
+    }
+
     const userRole = localStorage.getItem("user_role")
     const items: MenuItem[] = menuItems.map((menuItem) => ({
 
         label: menuItem.label,
         icon: menuItem.icon,
         template: (item, options) => {
-
-            if (userRole === "1") {
+            if (userRole === "2") {
                 if (item.label != "Пользователи" && item.label != "Фильмы") {
                     return (
                         <Link
@@ -32,14 +39,14 @@ export const Menu = () => {
                 }
             } else {
                 return (
-                        <Link
-                            to={menuItem.route ?? "/"}
-                            className="flex align-items-center px-3 py-2 cursor-pointer no-underline text-color"
-                        >
-                            {item.icon}
-                            <span className={`mx-2 ${item.items && 'font-semibold'}`}>{item.label}</span>
-                        </Link>
-                    );
+                    <Link
+                        to={menuItem.route ?? "/"}
+                        className="flex align-items-center px-3 py-2 cursor-pointer no-underline text-color"
+                    >
+                        {item.icon}
+                        <span className={`mx-2 ${item.items && 'font-semibold'}`}>{item.label}</span>
+                    </Link>
+                );
             }
 
         },
@@ -49,14 +56,17 @@ export const Menu = () => {
         <aside className="min-h-full">
             <Sidebar visible={visible} onHide={() => setVisible(false)}>
                 <PanelMenu model={items}/>
+
             </Sidebar>
             <Card className="panel_none card justify-content-center lg:block sm:hidden h-full">
                 <PanelMenu model={items} className="w-full md:w-20rem"/>
+                <h1 onClick={logotClick}>Выйти</h1>
             </Card>
             <Button className="fixed z-5 lg:hidden md:block right-0"
                     onClick={() => setVisible(true)}
                     icon="pi pi-bars"
             />
+
         </aside>
 
     );
