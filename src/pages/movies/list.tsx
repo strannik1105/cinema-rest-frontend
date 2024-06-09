@@ -65,7 +65,7 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
     }
 
     const columns: ColumnMeta[] = [
-        {field: "", header: "Картинка", filter: false, body: MovieImage},
+
         {field: "name", header: "Название фильма", filter: true},
         {field: "description", header: "Описание", filter: false, sortable: false},
         {field: "genre", header: "Жанр", filter: true},

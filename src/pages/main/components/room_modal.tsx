@@ -59,7 +59,6 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
     const postBook = async () => {
         // @ts-ignore
         const user_sid = localStorage.getItem("user_sid");
-        console.log(user_sid)
         const today = new Date(datetime24hStart);
         const startDay = today.toISOString().slice(0, -1)
         const today2 = new Date(datetime24hEnd);

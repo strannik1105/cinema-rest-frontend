@@ -52,3 +52,9 @@
 #sss {
     position : relative !important;
 }
+
+.payForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,13 +1,23 @@
 import {Header} from "@/pages/main/components/header";
-import React from "react";
+import React, {useState} from "react";
+import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
+import {RoomModal} from "@/pages/main/components/room_modal";
+import {PayModal} from "@/pages/main/components/pay_modal";
 
 
 export const Check = () => {
-     // @ts-ignore
+    // @ts-ignore
     const bookings = JSON.parse(localStorage.getItem("bookings"))
     const a = bookings.at(-1)
-     // @ts-ignore
+    // @ts-ignore
     const totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
+
+    const [visible, setVisible] = useState(false);
+
+    const modalOpen = () => {
+        setVisible(true);
+    }
 
     return (
         <>
@@ -23,6 +33,13 @@ export const Check = () => {
                     return (<p>{el.name}</p>)
                 })}</p>
                 <p className="text-lg">Итого: {totalPrice}</p>
+                <Button label="Оплатить" onClick={modalOpen}/>
+                 <Dialog visible={visible} style={{width: '50vw'}} onHide={() => {
+                    if (!visible) return;
+                    setVisible(false);
+                }}>
+                    <PayModal/>
+                </Dialog>
             </main>
 
         </>

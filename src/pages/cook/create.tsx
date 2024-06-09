@@ -34,7 +34,6 @@ export const CookCreate: React.FC<IResourceComponentsProps> = () => {
                     <span className="text-3xl p-card-title">Добавление записи</span>
                     <div className="flex gap-3">
                         <ListNavButton handleClick={() => list("cook")}/>
-                        <ListNavButton handleClick={() => list("cook")}/>
                     </div>
 
                 </div>
