@@ -29,7 +29,7 @@ export const Booking = () => {
     }
 
     return (
-        <>
+        <div className="site_content">
            <Header/>
             <main className="main">
                 <div className="booking_container">
@@ -69,7 +69,7 @@ export const Booking = () => {
                 </Dialog>
             </main>
 
-        </>
+        </div>
 
     )
 }

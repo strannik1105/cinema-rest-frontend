@@ -1,13 +1,16 @@
+html {
+    background:#fcf8f3;
+}
 body {
     margin: 0;
     padding: 0;
 }
 
 .header {
-    background: #20262b;
+    background: #f8d7ac;
     padding: 20px;
     text-align: center;
-    color: white;
+    color: #464544;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +25,7 @@ body {
 .header p {
     font-size: 25px;
     font-weight: 500;
+    margin: 0;
 }
 
 .main {
@@ -106,11 +110,15 @@ h1 {
 }
 
 .more_films {
-    background: #20262b;
+    background: #D3A154;
     padding: 20px;
     border-radius: 20px;
     font-weight: 700;
     text-transform: uppercase;
+}
+
+.more_films:hover {
+     background: #fdbf68;
 }
 
 .films__container {

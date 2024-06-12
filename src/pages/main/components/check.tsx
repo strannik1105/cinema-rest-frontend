@@ -2,7 +2,6 @@ import {Header} from "@/pages/main/components/header";
 import React, {useState} from "react";
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
-import {RoomModal} from "@/pages/main/components/room_modal";
 import {PayModal} from "@/pages/main/components/pay_modal";
 
 
@@ -20,7 +19,7 @@ export const Check = () => {
     }
 
     return (
-        <>
+        <div className="site_content">
             <Header/>
             <main className="main">
                 <h2>Ваш заказ:</h2>
@@ -42,6 +41,6 @@ export const Check = () => {
                 </Dialog>
             </main>
 
-        </>
+        </div>
     )
 }

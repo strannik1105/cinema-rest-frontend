@@ -52,7 +52,7 @@ export const BList = () => {
 
     if (bookings) {
         return (
-            <>
+            <div className="site_content">
                 <Header/>
                 <main className="main">
                     <h2>Моя бронь и заказы</h2>
@@ -71,7 +71,7 @@ export const BList = () => {
                     })}
                 </main>
 
-            </>
+            </div>
         )
     }
 

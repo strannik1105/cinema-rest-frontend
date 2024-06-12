@@ -14,7 +14,7 @@ export const AllFoods = () => {
 
     if (foods) {
         return (
-            <>
+            <div className="site_content">
                 <Header/>
                 <h1>Все блюда</h1>
                 <div className="films">
@@ -30,7 +30,7 @@ export const AllFoods = () => {
                         )
                     })}
                 </div>
-            </>
+            </div>
         )
     }
     return <> <Header/></>

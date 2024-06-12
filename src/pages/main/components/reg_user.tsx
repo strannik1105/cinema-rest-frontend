@@ -31,7 +31,7 @@ export const RegUser = () => {
     }
 
     return (
-        <>
+        <div className="site_content">
             <Header/>
             <main className="main">
                 <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
@@ -48,7 +48,7 @@ export const RegUser = () => {
                 </form>
                 <h2>Есть аккаунта? <Link to="/main_login">Войти</Link></h2>
             </main>
-        </>
+        </div>
 
     )
 }

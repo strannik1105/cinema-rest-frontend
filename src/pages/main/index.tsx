@@ -9,7 +9,7 @@ import {MainLogin} from "@/pages/main/components/register";
 
 export const MainPage = () => {
     return (
-        <>
+        <div className="site_content">
             <Header/>
             <main className="main">
                 <Routes>
@@ -18,6 +18,6 @@ export const MainPage = () => {
                     <Route path="/booking_rooms" element={<Booking/>}/>
                 </Routes>
             </main>
-        </>
+        </div>
     )
 }

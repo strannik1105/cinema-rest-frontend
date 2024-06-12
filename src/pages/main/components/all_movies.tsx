@@ -14,7 +14,7 @@ export const AllMovies = () => {
 
     if (films) {
         return (
-            <>
+            <div className="site_content">
                 <Header/>
                 <h1>Все фильмы</h1>
                 <div className="films">
@@ -30,7 +30,7 @@ export const AllMovies = () => {
                         )
                     })}
                 </div>
-            </>
+            </div>
         )
     }
     return <> <Header/></>

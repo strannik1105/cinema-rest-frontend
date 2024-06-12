@@ -29,7 +29,7 @@ export const MainLogin = () => {
     }
 
     return (
-        <>
+        <div className="site_content">
             <Header/>
             <main className="main">
                 <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
@@ -43,7 +43,7 @@ export const MainLogin = () => {
                 </form>
                 <h2>Нет аккаунта? <Link to="/main_reg">Зарегистрироваться</Link></h2>
             </main>
-        </>
+        </div>
 
     )
 };
