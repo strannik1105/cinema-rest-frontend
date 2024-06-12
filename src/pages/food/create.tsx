@@ -84,8 +84,7 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
                        accept="image/png, image/jpeg"
                        className="text-base text-color w-full md:w-20rem"
                        onChange={onUploadImage}/>
-
-
+                <Button label="Добавить запись"/>
             </form>
         </Card>
     )
