@@ -19,7 +19,7 @@ export const BList = () => {
     const [foods, setFoods] = useState<any>();
 
     useEffect(() => {
-         axios.get("http://localhost:8001/api/v1/food")
+        axios.get("http://localhost:8001/api/v1/food")
             .then(res => {
                 setFoods(res.data)
             })
@@ -50,6 +50,22 @@ export const BList = () => {
         return formatDateTime(dateValue)
     }
 
+    const dateStartTemplate = (rowData: any) => {
+        // @ts-ignore
+        const bookings = JSON.parse(localStorage.getItem("bookings"));
+        const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
+
+        return filmName.dateStart
+    }
+
+    const dateEndTemplate = (rowData: any) => {
+        // @ts-ignore
+        const bookings = JSON.parse(localStorage.getItem("bookings"));
+        const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
+
+        return filmName.dateEnd
+    }
+
     if (bookings) {
         return (
             <div className="site_content">
@@ -61,8 +77,8 @@ export const BList = () => {
                         return (
                             <>
                                 <p className="text-lg">Пользователь: {user}</p>
-                                <p className="text-lg">Дата начала: {dateTemplate(el.datetime_start)}</p>
-                                <p className="text-lg">Дата окончания: {dateTemplate(el.datetime_end)}</p>
+                                <p className="text-lg">Дата начала: {dateStartTemplate(el)}</p>
+                                <p className="text-lg">Дата окончания: {dateEndTemplate(el)}</p>
                                 <p className="text-lg">Еда: {foodListBodyTemplate(el)}</p>
                                 <hr/>
                             </>

@@ -51,12 +51,12 @@
 }
 
 .konvajs-content {
-   background: url("/схема2.png") no-repeat !important;
+    background: url("/схема2.png") no-repeat !important;
     background-size: 500px;
 }
 
 #sss {
-    position : relative !important;
+    position: relative !important;
 }
 
 .payForm {
@@ -69,4 +69,39 @@
     color: #212529;
     font-weight: 700;
     text-transform: uppercase;
+}
+
+.times_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.times_list p {
+    border: #D3A154 2px solid;
+    width: max-content;
+    padding: 5px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+.choisen {
+    background: #e7a843;
+    color: white;
+}
+
+.footer {
+    background: #f8d7ac;
+    padding: 20px;
+    text-align: center;
+    color: #464544;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer p {
+    font-size: 20px;
+    font-weight: 700;
 }

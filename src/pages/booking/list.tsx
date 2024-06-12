@@ -71,7 +71,7 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
             .then(res => {
                 setMovies(res.data)
             })
-         axios.get("http://localhost:8001/api/v1/food")
+        axios.get("http://localhost:8001/api/v1/food")
             .then(res => {
                 setFoods(res.data)
             })
@@ -95,7 +95,7 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
 
     const userBodyTemplate = (rowData: any) => {
         if (users) {
-             // @ts-ignore
+            // @ts-ignore
             const bookings = JSON.parse(localStorage.getItem("bookings"));
             const obj = bookings.find((el: any) => el.booking_sid == rowData.sid);
 
@@ -119,6 +119,22 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
 
             return filmName.film
         }
+    }
+
+    const dateStartTemplate = (rowData: any) => {
+        // @ts-ignore
+        const bookings = JSON.parse(localStorage.getItem("bookings"));
+        const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
+
+        return filmName.dateStart
+    }
+
+    const dateEndTemplate = (rowData: any) => {
+        // @ts-ignore
+        const bookings = JSON.parse(localStorage.getItem("bookings"));
+        const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
+
+        return filmName.dateEnd
     }
 
     const foodListBodyTemplate = (rowData: any) => {
@@ -146,14 +162,6 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
         );
     }
 
-    const dateStartBodyTemplate = (rowData: any) => {
-        return dateTemplate(rowData.datetime_start)
-    }
-
-    const dateEndBodyTemplate = (rowData: any) => {
-        return dateTemplate(rowData.datetime_end)
-    }
-
     const columns: ColumnMeta[] = [
         {field: "user", header: "Пользователь", filter: false, sortable: false, body: userBodyTemplate},
         {field: "film", header: "Фильм", filter: false, sortable: false, body: filmBodyTemplate},
@@ -161,8 +169,20 @@ export const BookingList: React.FC<IResourceComponentsProps> = () => {
         {field: "waiter_sid", header: "Официант", filter: true, sortable: true, body: waiterBodyTemplate},
         {field: "cook_sid", header: "Повар", filter: true, sortable: true, body: cookBodyTemplate},
         {field: "food_list", header: "Еда", filter: true, sortable: true, body: foodListBodyTemplate},
-        {field: "datetime_start", header: "Дата время начала", filter: true, sortable: true, body: dateStartBodyTemplate},
-        {field: "datetime_end", header: "Дата время окончания", filter: true, sortable: true, body: dateEndBodyTemplate},
+        {
+            field: "datetime_start",
+            header: "Дата время начала",
+            filter: true,
+            sortable: true,
+            body: dateStartTemplate
+        },
+        {
+            field: "datetime_end",
+            header: "Дата время окончания",
+            filter: true,
+            sortable: true,
+            body: dateEndTemplate
+        },
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 
