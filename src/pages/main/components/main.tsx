@@ -61,6 +61,9 @@ export const Main = () => {
                             <div>
                                 <h2>{el.name}</h2>
                                 <p>{el.description}</p>
+                                <p>Жанр: {el.genre}</p>
+                                <p>Год: {el.yaer}</p>
+                                <p>Длительность: {el.duration}</p>
                             </div>
                         </div>
                     )

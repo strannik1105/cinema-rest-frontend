@@ -109,6 +109,22 @@ h1 {
     flex-direction: column;
 }
 
+.films {
+    max-width: 1300px;
+    margin: 20px auto;
+}
+
+.fiter_form {
+    margin-bottom: 40px;
+}
+
+.fiter_form p {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
 .more_films {
     background: #D3A154;
     padding: 20px;
