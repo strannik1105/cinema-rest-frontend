@@ -21,6 +21,8 @@ export const MovieCreate: React.FC<IResourceComponentsProps> = () => {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const [genre, setGenre] = useState<string>("");
+    const [year, setYear] = useState<string>("");
+    const [duration, setDuration] = useState<string>("");
 
 
     const {list} = useNavigation();
@@ -36,11 +38,11 @@ export const MovieCreate: React.FC<IResourceComponentsProps> = () => {
         axios.post("http://127.0.0.1:8001/api/v1/movies/", {
             name: name,
             description: description,
-            genre: genre
+            genre: genre,
+            year: Number(year),
+            duration: Number(duration),
         })
             .then(resp => upload(resp.data.sid))
-
-        console.log(localStorage.getItem("newId"))
 
         navigate("/movies/")
     }
@@ -85,6 +87,12 @@ export const MovieCreate: React.FC<IResourceComponentsProps> = () => {
 
                 <label htmlFor="genre">Жанр</label>
                 <InputText value={genre} onChange={(e) => setGenre(e.target.value)}/>
+
+                <label htmlFor="genre">Год</label>
+                <InputText value={year} onChange={(e) => setYear(e.target.value)}/>
+
+                <label htmlFor="genre">Длительность(в минутах)</label>
+                <InputText value={duration} onChange={(e) => setDuration(e.target.value)}/>
 
                 <label htmlFor="price">Изображение</label>
                 <input id="uploadImage"

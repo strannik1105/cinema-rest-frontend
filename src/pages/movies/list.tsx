@@ -69,6 +69,8 @@ export const MoviesList: React.FC<IResourceComponentsProps> = () => {
         {field: "name", header: "Название фильма", filter: true},
         {field: "description", header: "Описание", filter: false, sortable: false},
         {field: "genre", header: "Жанр", filter: true},
+        {field: "year", header: "Год", filter: true},
+        {field: "duration", header: "Длительность в минутах", filter: true},
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 

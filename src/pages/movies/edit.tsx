@@ -20,7 +20,7 @@ export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
         id: params.id
     });
 
-     const {list, create} = useNavigation();
+    const {list, create} = useNavigation();
 
     const record = queryResult?.data?.data;
 
@@ -33,7 +33,8 @@ export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
                 name: data.name,
                 description: data.description,
                 genre: data.genre,
-
+                year: Number(data.year),
+                duration: Number(data.duration),
             }
         );
     };
@@ -53,22 +54,37 @@ export const MovieEdit: React.FC<IResourceComponentsProps> = () => {
                 }
             >
                 <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">Название</label>
                     <input type="text" id="name" name="name" defaultValue={record?.name}/>
 
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Описание</label>
                     <textarea
                         id="description"
                         name="description"
                         defaultValue={record?.description}
                     />
 
-                    <label htmlFor="genre">genre</label>
+                    <label htmlFor="genre">Жанр</label>
                     <input
                         type="text"
                         id="genre"
                         name="genre"
                         defaultValue={record?.genre}
+                    />
+
+                    <label htmlFor="year">Год</label>
+                    <input
+                        type="text"
+                        id="year"
+                        name="year"
+                        defaultValue={record?.year}
+                    />
+                    <label htmlFor="duration">Длительность в минутах</label>
+                    <input
+                        type="text"
+                        id="duration"
+                        name="duration"
+                        defaultValue={record?.duration}
                     />
                     <Button label="Изменить запись"/>
                 </form>

@@ -33,6 +33,8 @@ export const MovieDetail: React.FC<IResourceComponentsProps> = () => {
                 <p className="text-lg">Название: {record.name}</p>
                 <p className="text-lg">Описание: {record.description}</p>
                 <p className="text-lg">Жанр: {record.genre}</p>
+                <p className="text-lg">Год: {record.year}</p>
+                <p className="text-lg">Длительность в минутах: {record.duration}</p>
 
             </Card>
         )
