@@ -30,7 +30,7 @@ export const Booking = () => {
 
     return (
         <div className="site_content">
-           <Header/>
+            <Header/>
             <main className="main">
                 <div className="booking_container">
                     <h2>Забронируйте комнату прямо сейчас</h2>
@@ -68,7 +68,10 @@ export const Booking = () => {
                     <RoomModal id={roomId}/>
                 </Dialog>
             </main>
-
+            <footer className="footer">
+                <p>Адрес: ул Ленина 123</p>
+                <p>Номер телефона: 88001234554</p>
+            </footer>
         </div>
 
     )

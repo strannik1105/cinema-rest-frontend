@@ -1,7 +1,14 @@
+body {
+    height: 100%;
+}
+
 .site_content {
     font-family: Roboto;
     background: #fcf8f3;
     color: #464544;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .addButton {
@@ -99,9 +106,15 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
+    flex: 0 0 auto;
 }
 
 .footer p {
     font-size: 20px;
     font-weight: 700;
+}
+
+.main {
+    flex: 1 0 auto;
+    width: 100%;
 }

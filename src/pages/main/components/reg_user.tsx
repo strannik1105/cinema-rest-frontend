@@ -48,6 +48,10 @@ export const RegUser = () => {
                 </form>
                 <h2>Есть аккаунта? <Link to="/main_login">Войти</Link></h2>
             </main>
+            <footer className="footer">
+                <p>Адрес: ул Ленина 123</p>
+                <p>Номер телефона: 88001234554</p>
+            </footer>
         </div>
 
     )

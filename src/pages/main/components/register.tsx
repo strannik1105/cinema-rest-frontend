@@ -43,6 +43,10 @@ export const MainLogin = () => {
                 </form>
                 <h2>Нет аккаунта? <Link to="/main_reg">Зарегистрироваться</Link></h2>
             </main>
+            <footer className="footer">
+                <p>Адрес: ул Ленина 123</p>
+                <p>Номер телефона: 88001234554</p>
+            </footer>
         </div>
 
     )

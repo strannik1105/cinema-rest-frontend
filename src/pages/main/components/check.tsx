@@ -33,14 +33,17 @@ export const Check = () => {
                 })}</p>
                 <p className="text-lg">Итого: {totalPrice}</p>
                 <Button label="Оплатить" onClick={modalOpen}/>
-                 <Dialog visible={visible} style={{width: '50vw'}} onHide={() => {
+                <Dialog visible={visible} style={{width: '50vw'}} onHide={() => {
                     if (!visible) return;
                     setVisible(false);
                 }}>
                     <PayModal/>
                 </Dialog>
             </main>
-
+            <footer className="footer">
+                <p>Адрес: ул Ленина 123</p>
+                <p>Номер телефона: 88001234554</p>
+            </footer>
         </div>
     )
 }
