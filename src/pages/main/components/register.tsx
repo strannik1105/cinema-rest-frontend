@@ -34,12 +34,12 @@ export const MainLogin = () => {
             <main className="main">
                 <form action="" onSubmit={onSubmit} className="flex flex-column gap-2">
                     <label htmlFor="name">Логин</label>
-                    <InputText value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <InputText className="w-12rem" value={username} onChange={(e) => setUsername(e.target.value)}/>
 
                     <label htmlFor="genre">Пароль</label>
                     <Password value={password} onChange={(e) => setPassword(e.target.value)}/>
 
-                    <Button label="Войти"/>
+                    <Button className="w-12rem" label="Войти"/>
                 </form>
                 <h2>Нет аккаунта? <Link to="/main_reg">Зарегистрироваться</Link></h2>
             </main>

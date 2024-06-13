@@ -45,7 +45,7 @@ export const AllFoods = () => {
                     <div className="films">
                         <div className="fiter_form">
                             <p>
-                                <label htmlFor="">Жанр</label>
+                                <label htmlFor="">Вид</label>
                                 <Dropdown value={genre}
                                           onChange={(e) => onSelectGenre(e)}
                                           options={genres} optionLabel="name"
