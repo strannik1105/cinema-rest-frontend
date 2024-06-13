@@ -7,6 +7,7 @@ import {Button} from "primereact/button";
 import {useNavigate} from "react-router-dom";
 import {FloatLabel} from "primereact/floatlabel";
 import {format} from "date-fns";
+import {FoodImage} from "@/pages/main/components/food_image";
 
 interface IProps {
     id: string
@@ -220,14 +221,10 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
             }
         }
 
-        console.log(res)
-
         if (dates) {
-            console.log(dates)
             for (let i = 0; i < 48; i++) {
                 // @ts-ignore
                 const curItem = dates.filter((el: any) => el.dateStart == res[i])
-                console.log(curItem)
                 if (curItem.length > 0) {
                     let j = i;
                     while (res[j] != curItem[0].dateEnd) {
@@ -246,6 +243,15 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
         const aaa = res.filter((el: any) => el != "")
 
         return aaa
+    }
+
+    const itemTemplate = (option: any) => {
+        return (
+            <div className="flex align-items-center sdf gap-3">
+                <FoodImage sid={option.code}/>
+                <p>{option.name} {option.price}</p>
+            </div>
+        )
     }
 
     const [choisenTime, setChoisenTime] = useState<any>();
@@ -274,7 +280,7 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
                 <p>{data.description}</p>
                 <p>{data.cost_per_hour}</p>
                 <MultiSelect value={selectedFood} onChange={(e) => setSelectedFood(e.value)} options={foodChoices}
-                             optionLabel="name"
+                             optionLabel="name" itemTemplate={itemTemplate}
                              placeholder="Выберите еду" className="w-full md:w-20rem"/>
                 <br/>
                 <br/>
