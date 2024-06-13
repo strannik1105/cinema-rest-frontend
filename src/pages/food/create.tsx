@@ -13,6 +13,7 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
     const [description, setDescription] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [recipe, setRecipe] = useState<string>("");
+    const [type, setType] = useState<string>("");
 
     const {list} = useNavigation();
 
@@ -28,7 +29,8 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
             name: name,
             description: description,
             price: Number(price),
-            recipe: recipe
+            recipe: recipe,
+            type_: type
         })
             .then(resp => upload(resp.data.sid))
         navigate("/food/")
@@ -76,6 +78,9 @@ export const FoodCreate: React.FC<IResourceComponentsProps> = () => {
 
                 <label htmlFor="price">Рецепт</label>
                 <InputText value={recipe} onChange={(e) => setRecipe(e.target.value)}/>
+
+                <label htmlFor="type_">Тип</label>
+                <InputText value={type} onChange={(e) => setType(e.target.value)}/>
 
                 <label htmlFor="price">Изображение</label>
                 <input id="uploadImage"

@@ -35,12 +35,9 @@ export const AllMovies = () => {
         {name: "драма", code: "драма"},
         {name: "мюзикл", code: "мюзикл"},
         {name: "криминал", code: "криминал"},
+        {name: "боевик", code: "боевик"},
+        {name: "комедия", code: "комедия"},
     ]
-
-    const onFilter = () => {
-        axios.get("http://localhost:8001/api/v1/movies/", {params: query})
-            .then(data => setFilms(data.data))
-    }
 
     if (films) {
         return (

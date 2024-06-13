@@ -4,6 +4,7 @@ import {Card} from "primereact/card";
 import {ListNavButton} from "@/components/navButtons/listNavButton";
 import {InputText} from "primereact/inputtext";
 import {ICook, ICookForm} from "@/interfaces/cook";
+import {Button} from "primereact/button";
 
 
 export const CookCreate: React.FC<IResourceComponentsProps> = () => {
@@ -46,7 +47,7 @@ export const CookCreate: React.FC<IResourceComponentsProps> = () => {
                 <label htmlFor="description">Фамилия</label>
                 <InputText value={surname} onChange={(e) => setSurname(e.target.value)}/>
 
-                <button type="submit">Submit</button>
+                 <Button label="Добавить запись"/>
             </form>
         </Card>
     )

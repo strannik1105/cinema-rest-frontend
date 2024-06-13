@@ -70,6 +70,7 @@ export const FoodList: React.FC<IResourceComponentsProps> = () => {
         {field: "description", header: "Описание", filter: false, sortable: false},
         {field: "price", header: "Цена", filter: true},
         {field: "recipe", header: "Рецепт", filter: true},
+        {field: "type_", header: "Тип", filter: true},
         {field: '', header: 'Actions', body: actionBodyTemplate, sortable: false, filter: false},
     ]
 

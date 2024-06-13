@@ -33,6 +33,7 @@ export const FoodDetail: React.FC<IResourceComponentsProps> = () => {
                 <p className="text-lg">Описание: {record.description}</p>
                 <p className="text-lg">Цена: {record.price}</p>
                 <p className="text-lg">Рецепт: {record.recipe}</p>
+                <p className="text-lg">Рецепт: {record.type_}</p>
 
             </Card>
         )

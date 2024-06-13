@@ -34,6 +34,7 @@ export const FoodEdit: React.FC<IResourceComponentsProps> = () => {
                 description: data.description,
                 price: Number(data.price),
                 recipe: data.recipe,
+                type_: data.type_
             }
         );
     };
@@ -80,6 +81,14 @@ export const FoodEdit: React.FC<IResourceComponentsProps> = () => {
                             id="recipe"
                             name="recipe"
                             defaultValue={record?.recipe}
+                        />
+                    </p>
+                    <p className="text-field">
+                        <label htmlFor="recipe">Тип</label>
+                        <textarea
+                            id="type_"
+                            name="type_"
+                            defaultValue={record?.type_}
                         />
                     </p>
                     <Button label="Изменить запись"/>

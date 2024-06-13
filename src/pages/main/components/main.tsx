@@ -18,6 +18,8 @@ export const Main = () => {
             .then(data => setFoods(data.data.slice(0, 3)))
     }, []);
 
+    const a = localStorage.getItem("user")
+
     return (
         <div className="main__container">
             <Carousel>
@@ -62,8 +64,9 @@ export const Main = () => {
                                 <h2>{el.name}</h2>
                                 <p>{el.description}</p>
                                 <p>Жанр: {el.genre}</p>
-                                <p>Год: {el.yaer}</p>
-                                <p>Длительность: {el.duration}</p>
+                                <p>Год: {el.year}</p>
+                                <p>Длительность: {el.duration} минут</p>
+                                <Link to={a ? "/booking_rooms" :"/main_login"}>Бронировать</Link>
                             </div>
                         </div>
                     )

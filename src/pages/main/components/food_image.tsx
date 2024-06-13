@@ -13,10 +13,6 @@ export const FoodImage = (sid: any) => {
 
     }, [])
 
-    if (movieImage) {
-        console.log(movieImage)
-    }
-
     let imageFile = "";
 
     if (movieImage !== undefined) {
@@ -24,8 +20,5 @@ export const FoodImage = (sid: any) => {
             imageFile = movieImage[0].file
     }
 
-    console.log(imageFile)
-
     return <img src={imageFile} alt=""/>
-
 }
