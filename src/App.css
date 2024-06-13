@@ -118,3 +118,14 @@ body {
     flex: 1 0 auto;
     width: 100%;
 }
+
+.sksk {
+    width: 1000px;
+    margin: auto;
+}
+
+.carousel-item img {
+    aspect-ratio: 16 / 9;
+    width: 1000px;
+    height: 100%;
+}

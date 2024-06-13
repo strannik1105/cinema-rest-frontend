@@ -22,35 +22,23 @@ export const Main = () => {
 
     return (
         <div className="main__container">
-            <Carousel>
+            <Carousel className="sksk">
                 <Carousel.Item>
                     <img
-                        src="https://cinema.moscow/system/uploads/slide/image/10686/slide_slide_%D0%94%D0%B2%D0%B0_%D1%82%D0%B0%D1%80%D1%82%D0%B0%D1%80%D0%B0_4.jpg"
+                        src="public/1%20(1).jpg"
                         alt=""/>
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
+
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        src="https://cinema.moscow/system/uploads/slide/image/10685/slide_slide_%D0%90%D1%81%D1%81%D0%BE%D1%80%D1%82%D0%B8_%D1%81%D1%8B%D1%80%D0%BE%D0%B2_2.jpg"
+                        src="public/2%20(1).jpg"
                         alt=""/>
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
+
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        src="https://cinema.moscow/system/uploads/slide/image/10690/slide_slide_DSC_1848.jpg"
+                        src="public/3%20(1).jpg"
                         alt=""/>
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>
-                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                        </p>
-                    </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
 

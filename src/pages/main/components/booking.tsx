@@ -42,13 +42,13 @@ export const Booking = () => {
                                     return (
                                         <div onClick={onClick} id={el.sid}>
                                             <Rect
+                                                fillPriority={"asd"}
                                                 x={el.x}
                                                 y={el.y}
                                                 width={100}
                                                 height={100}
-                                                fill="red"
-                                                shadowBlur={10}
-
+                                                fill="#d92929"
+                                                opacity={0.4}
                                             />
                                             <Text text={el.name} fontSize={15} x={el.x + 10}
                                                   y={el.y + 25} width={100}
@@ -69,8 +69,8 @@ export const Booking = () => {
                 </Dialog>
             </main>
             <footer className="footer">
-                <p>Адрес: ул Ленина 123</p>
-                <p>Номер телефона: 88001234554</p>
+                <p>Адрес: ул Красная 135</p>
+                <p>Номер телефона: 89186968405</p>
             </footer>
         </div>
 

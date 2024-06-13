@@ -41,8 +41,8 @@ export const Check = () => {
                 </Dialog>
             </main>
             <footer className="footer">
-                <p>Адрес: ул Ленина 123</p>
-                <p>Номер телефона: 88001234554</p>
+                <p>Адрес: ул Красная 135</p>
+                <p>Номер телефона: 89186968405</p>
             </footer>
         </div>
     )

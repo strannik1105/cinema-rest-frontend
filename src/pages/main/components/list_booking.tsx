@@ -55,6 +55,8 @@ export const BList = () => {
         const bookings = JSON.parse(localStorage.getItem("bookings"));
         const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
 
+        console.log(rowData)
+
         return filmName.dateStart
     }
 
@@ -87,8 +89,8 @@ export const BList = () => {
                     })}
                 </main>
                 <footer className="footer">
-                    <p>Адрес: ул Ленина 123</p>
-                    <p>Номер телефона: 88001234554</p>
+                    <p>Адрес: ул Красная 135</p>
+                    <p>Номер телефона: 89186968405</p>
                 </footer>
             </div>
         )

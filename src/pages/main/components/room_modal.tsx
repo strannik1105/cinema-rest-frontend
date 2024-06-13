@@ -201,28 +201,27 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
             })
         }
 
-        let h = 0;
-        // @ts-ignore
-        const res = [];
-        for (let i = 0; i < 48; i++) {
-            if (i % 2 != 0) {
-                if (h < 10) {
-                    res.push(`0${h}:30`)
-                } else {
-                    res.push(`${h}:30`)
-                }
-                h++;
-            } else {
-                if (h < 10) {
-                    res.push(`0${h}:00`)
-                } else {
-                    res.push(`${h}:00`)
-                }
-            }
-        }
+        const res = [
+            "10:00", "10:30",
+            "11:00", "11:30",
+            "12:00", "12:30",
+            "13:00", "13:30",
+            "14:00", "14:30",
+            "15:00", "15:30",
+            "16:00", "16:30",
+            "17:00", "17:30",
+            "18:00", "18:30",
+            "18:00", "19:30",
+            "20:00", "20:30",
+            "21:00", "21:30",
+            "22:00", "22:30",
+            "23:00", "23:30",
+            "00:00", "00:30",
+            "01:00"
+        ];
 
         if (dates) {
-            for (let i = 0; i < 48; i++) {
+            for (let i = 0; i < res.length; i++) {
                 // @ts-ignore
                 const curItem = dates.filter((el: any) => el.dateStart == res[i])
                 if (curItem.length > 0) {
@@ -238,8 +237,6 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
                 }
             }
         }
-
-
         const aaa = res.filter((el: any) => el != "")
 
         return aaa
