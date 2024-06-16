@@ -28,8 +28,6 @@ export const PayModal = () => {
                    name="name"/>
             <input className="payform-tinkoff-row" type="email" placeholder="E-mail"
                    name="email"/>
-            <input className="payform-tinkoff-row" type="tel"
-                   placeholder="Контактный телефон" name="phone"/>
             <input className="payform-tinkoff-row payform-tinkoff-btn" type="submit"
                    value="Оплатить" onClick={onPay}/>
         </form>
