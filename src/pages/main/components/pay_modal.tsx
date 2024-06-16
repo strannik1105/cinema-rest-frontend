@@ -13,8 +13,6 @@ export const PayModal = () => {
 
     // @ts-ignore
     const userSid = localStorage.getItem("user_sid")
-    console.log(userSid)
-
 
     const [user, setUser] = useState<any>();
 
@@ -26,29 +24,64 @@ export const PayModal = () => {
             })
     }, []);
 
-
-    const navigate = useNavigate();
     const onPay = () => {
-        navigate("/blist")
+
+        const TPF = document.getElementById("payform-tinkoff");
+
+        // @ts-ignore
+        TPF.addEventListener("submit", function (e) {
+            e.preventDefault();
+            // @ts-ignore
+            const {amount, email, receipt} = TPF;
+
+            if (receipt) {
+                if (!email.value)
+                    return alert("Поле E-mail или Phone не должно быть пустым");
+                // @ts-ignore
+                TPF.receipt.value = JSON.stringify({
+                    "EmailCompany": "mail@mail.com",
+                    "Taxation": "patent",
+                    "FfdVersion": "1.2",
+                    "Items": [
+                        {
+                            "Name": "Оплата",
+                            "Price": amount.value + '00',
+                            "Quantity": 1.00,
+                            "Amount": amount.value + '00',
+                            "PaymentMethod": "full_prepayment",
+                            "PaymentObject": "service",
+                            "Tax": "none",
+                            "MeasurementUnit": "pc"
+                        }
+                    ]
+                });
+            }
+            // @ts-ignore
+            pay(TPF);
+        })
     }
+
 
     if (user) {
         return (
-            <form className="payform-tinkoff" name="payform-tinkoff">
-                <input className="payform-tinkoff-row" type="hidden" name="terminalkey" value="TinkoffBankTest"/>
-                <input className="payform-tinkoff-row" type="hidden" name="frame" value="false"/>
-                <input className="payform-tinkoff-row" type="hidden" name="language" value="ru"/>
-                <input className="payform-tinkoff-row" type="text" placeholder="Сумма заказа" name="amount"
-                       value={totalPrice}
-                       required disabled/>
-                <input className="payform-tinkoff-row" type="hidden" placeholder="Номер заказа" name="order"/>
-                <input className="payform-tinkoff-row" type="text" placeholder="ФИО плательщика"
-                       name="name" defaultValue={a.user}/>
-                <input className="payform-tinkoff-row" type="email" placeholder="E-mail"
-                       name="email" defaultValue={user.email}/>
-                <input className="payform-tinkoff-row payform-tinkoff-btn" type="submit"
-                       value="Оплатить" onClick={onPay}/>
-            </form>
+            <>
+                <form className="payform-tinkoff" name="payform-tinkoff" id="payform-tinkoff" onSubmit={onPay}>
+                    <input className="payform-tinkoff-row" type="hidden" name="terminalkey" value="TinkoffBankTest"/>
+                    <input className="payform-tinkoff-row" type="hidden" name="frame" value="false"/>
+                    <input className="payform-tinkoff-row" type="hidden" name="language" value="ru"/>
+                    <input className="payform-tinkoff-row" type="text" placeholder="Сумма заказа" name="amount"
+                           value={totalPrice}
+                           required disabled/>
+                    <input className="payform-tinkoff-row" type="hidden" placeholder="Номер заказа" name="order"/>
+                    <input className="payform-tinkoff-row" type="text" placeholder="ФИО плательщика"
+                           name="name" defaultValue={a.user}/>
+                    <input className="payform-tinkoff-row" type="email" placeholder="E-mail"
+                           name="email" defaultValue={user.email}/>
+                    <input className="payform-tinkoff-row payform-tinkoff-btn" type="submit"
+                           value="Оплатить" onClick={onPay}/>
+                </form>
+            </>
+
         )
     }
     return <form className="payform-tinkoff" name="payform-tinkoff"></form>

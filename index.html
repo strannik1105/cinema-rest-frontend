@@ -28,6 +28,7 @@
 			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 			crossorigin="anonymous"
 	/>
+	<script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -54,4 +55,37 @@
 		src="https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js"
 		crossorigin></script>
 <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
+
+<script type="text/javascript">
+    const TPF = document.getElementById("payform-tinkoff");
+
+    TPF.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const {description, amount, email, phone, receipt} = TPF;
+
+        if (receipt) {
+            if (!email.value && !phone.value)
+                return alert("Поле E-mail или Phone не должно быть пустым");
+
+            TPF.receipt.value = JSON.stringify({
+                "EmailCompany": "mail@mail.com",
+                "Taxation": "patent",
+                "FfdVersion": "1.2",
+                "Items": [
+                    {
+                        "Name": description.value || "Оплата",
+                        "Price": amount.value + '00',
+                        "Quantity": 1.00,
+                        "Amount": amount.value + '00',
+                        "PaymentMethod": "full_prepayment",
+                        "PaymentObject": "service",
+                        "Tax": "none",
+                        "MeasurementUnit": "pc"
+                    }
+                ]
+            });
+        }
+        pay(TPF);
+    })
+</script>
 </html>
