@@ -1,40 +1,37 @@
-import {InputText} from "primereact/inputtext";
-import React, {useState} from "react";
-import {Button} from "primereact/button";
+import React from "react";
 import {useNavigate} from "react-router-dom";
-import {Password} from "primereact/password";
 
 
 export const PayModal = () => {
-    const [name, setName] = useState<string>("");
 
-    const [cartNum, setCartNum] = useState<string>();
-    const [cartDate, setCartDate] = useState<string>();
-    const [cartCvv, setCartCvv] = useState<string>();
+    // @ts-ignore
+    const bookings = JSON.parse(localStorage.getItem("bookings"))
+    const a = bookings.at(-1)
+    // @ts-ignore
+    const totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
+
 
     const navigate = useNavigate();
-
     const onPay = () => {
         navigate("/blist")
     }
 
     return (
-        <div className="payForm">
-            <label htmlFor="name">ФИО</label>
-            <InputText value={name} onChange={(e) => setName(e.target.value)}/>
-
-            <label htmlFor="description">Номер карты</label>
-            <InputText value={cartNum} onChange={(e) => setCartNum(e.target.value)}/>
-
-            <div className="flex align-items-center gap-5">
-                <label htmlFor="description">Дата</label>
-                <InputText value={cartDate} onChange={(e) => setCartDate(e.target.value)}/>
-
-                <label htmlFor="description">CVV</label>
-                <Password value={cartCvv} onChange={(e) => setCartCvv(e.target.value)}/>
-
-            </div>
-            <Button label="Оплатить" onClick={onPay}/>
-        </div>
+        <form className="payform-tinkoff" name="payform-tinkoff">
+            <input className="payform-tinkoff-row" type="hidden" name="terminalkey" value="TinkoffBankTest"/>
+            <input className="payform-tinkoff-row" type="hidden" name="frame" value="false"/>
+            <input className="payform-tinkoff-row" type="hidden" name="language" value="ru"/>
+            <input className="payform-tinkoff-row" type="text" placeholder="Сумма заказа" name="amount" value={totalPrice}
+                   required disabled/>
+            <input className="payform-tinkoff-row" type="hidden" placeholder="Номер заказа" name="order"/>
+            <input className="payform-tinkoff-row" type="text" placeholder="ФИО плательщика"
+                   name="name"/>
+            <input className="payform-tinkoff-row" type="email" placeholder="E-mail"
+                   name="email"/>
+            <input className="payform-tinkoff-row" type="tel"
+                   placeholder="Контактный телефон" name="phone"/>
+            <input className="payform-tinkoff-row payform-tinkoff-btn" type="submit"
+                   value="Оплатить" onClick={onPay}/>
+        </form>
     )
 }

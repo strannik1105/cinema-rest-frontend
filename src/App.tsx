@@ -49,6 +49,7 @@ import {AllMovies} from "@/pages/main/components/all_movies";
 import {AllFoods} from "@/pages/main/components/all_food";
 import {UserEdit} from "@/pages/users/edit";
 import {UserCreate} from "@/pages/users/create";
+import {Payment} from "@/pages/main/components/payment";
 
 function App() {
     return (
@@ -275,6 +276,11 @@ function App() {
                 <Route path="/check">
                     <Route index
                            element={<Check/>}/>
+                </Route>
+
+                <Route path="/payment">
+                    <Route index
+                           element={<Payment/>}/>
                 </Route>
 
                 <Route path="/blist">
