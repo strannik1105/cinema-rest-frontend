@@ -60,7 +60,7 @@ export const Menu = () => {
             </Sidebar>
             <Card className="panel_none card justify-content-center lg:block sm:hidden h-full">
                 <PanelMenu model={items} className="w-full md:w-20rem"/>
-                <h1 onClick={logotClick}>Выйти</h1>
+                <Button className="mt-5" onClick={logotClick} severity="danger">Выйти</Button>
             </Card>
             <Button className="fixed z-5 lg:hidden md:block right-0"
                     onClick={() => setVisible(true)}

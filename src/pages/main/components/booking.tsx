@@ -34,7 +34,7 @@ export const Booking = () => {
             <main className="main">
                 <div className="booking_container">
                     <h2>Забронируйте комнату прямо сейчас</h2>
-                    <Stage width={500} height={500}>
+                    <Stage width={600} height={600}>
                         <Layer>
                             <Text fontSize={15}/>
                             {
@@ -45,8 +45,8 @@ export const Booking = () => {
                                                 fillPriority={"asd"}
                                                 x={el.x}
                                                 y={el.y}
-                                                width={100}
-                                                height={100}
+                                                width={90}
+                                                height={90}
                                                 fill="#d92929"
                                                 opacity={0.4}
                                             />

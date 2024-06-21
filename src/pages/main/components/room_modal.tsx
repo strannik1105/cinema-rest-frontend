@@ -133,7 +133,7 @@ export const RoomModal: React.FC<IProps> = ({id}) => {
                     dateStart: dateTemplate(dateTimeStart.toString()),
                     dateEnd: dateTemplate(dateTimeEnd.toString()),
                     room: data.name,
-                    booking_sid: tmp
+                    booking_sid: tmp,
                 }
 
                 for (let i = 0; i < selectedFood.length; i++) {

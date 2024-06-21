@@ -60,7 +60,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                 }
             >
 
-                <Stage width={500} height={500}>
+                <Stage width={600} height={600}>
                     <Layer>
                         {
                             rooms?.map((el: any) => {
@@ -91,8 +91,8 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                                             draggable
                                             x={el.x}
                                             y={el.y}
-                                            width={100}
-                                            height={100}
+                                            width={90}
+                                            height={90}
                                             fill="#d92929"
                                             opacity={0.4}
                                             onDragStart={(e) => onRoomDragStart(e)}

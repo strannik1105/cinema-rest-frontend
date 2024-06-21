@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Header} from "@/pages/main/components/header";
-import {FoodImage} from "@/pages/main/components/food_image";
 import {Dropdown} from "primereact/dropdown";
 
 
@@ -12,15 +11,24 @@ export const AllFoods = () => {
 
     });
 
-    useEffect(() => {
+    useEffect( () => {
         axios.get("http://localhost:8001/api/v1/food/", {params: query})
-            .then(data => setFoods(data.data))
+            .then(data => {
+                data.data.forEach(async (el: any) => {
+                    el["image"] = await drawImage(el.sid).then(data => data.data[0].file)
+                })
+                setTimeout(() => setFoods(data.data), 700)
+
+            })
     }, [query]);
 
-    const [genre, setGenre] = useState()
+    const [genre, setGenre] = useState();
 
+    const drawImage = async (sid: string) => {
+        return axios.get("http://127.0.0.1:8001/api/v1/food_images/" + sid)
+    }
 
-     const onSelectGenre = (el: any) => {
+    const onSelectGenre = (el: any) => {
         setQuery({
             ...query,
             type_: el.value.name
@@ -28,10 +36,10 @@ export const AllFoods = () => {
         setGenre(el.value)
     }
 
-     const genres = [
+    const genres = [
         {name: "основное", code: "основное"},
         {name: "закуски", code: "закуски"},
-        {name: "напитки", code: "напитки"},
+        {name: "напиток", code: "напиток"},
         {name: "десерты", code: "десерты"},
         {name: "комбо", code: "комбо"},
     ]
@@ -49,14 +57,15 @@ export const AllFoods = () => {
                                 <Dropdown value={genre}
                                           onChange={(e) => onSelectGenre(e)}
                                           options={genres} optionLabel="name"
-                                          placeholder="Выберите жанр" className="w-full md:w-14rem"/>
+                                          placeholder="Выберите вид" className="w-full md:w-14rem"/>
                             </p>
 
                         </div>
+
                         {foods.map((el: any) => {
                             return (
                                 <div className="film animate__bounce animate__delay-2s">
-                                    <FoodImage sid={el.sid}/>
+                                    <img src={el.image} alt=""/>
                                     <div>
                                         <h2>{el.name}</h2>
                                         <p>{el.description}</p>
@@ -66,6 +75,7 @@ export const AllFoods = () => {
                                 </div>
                             )
                         })}
+
                     </div>
                 </main>
 

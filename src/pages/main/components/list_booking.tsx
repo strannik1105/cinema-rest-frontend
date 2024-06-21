@@ -31,7 +31,6 @@ export const BList = () => {
             const bookings = JSON.parse(localStorage.getItem("bookings"));
 
             const foodObj = bookings.find((el: any) => el.booking_sid == rowData.sid);
-            console.log(rowData)
             let res = "";
             foodObj.food.forEach((el: any) => {
                 res += el.name
@@ -46,17 +45,10 @@ export const BList = () => {
         return format(value, 'dd.MM.yyyy HH:mm:ss')
     }
 
-    const dateTemplate = (dateValue: string) => {
-        return formatDateTime(dateValue)
-    }
-
     const dateStartTemplate = (rowData: any) => {
         // @ts-ignore
         const bookings = JSON.parse(localStorage.getItem("bookings"));
         const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
-
-        console.log(rowData)
-
         return filmName.dateStart
     }
 
@@ -68,17 +60,27 @@ export const BList = () => {
         return filmName.dateEnd
     }
 
+    const filmTemplate = (rowData: any) => {
+        // @ts-ignore
+        const bookings = JSON.parse(localStorage.getItem("bookings"));
+        const filmName = bookings.find((el: any) => el.booking_sid == rowData.sid)
+
+        return filmName.film
+    }
+
+
+
     if (bookings) {
         return (
             <div className="site_content">
                 <Header/>
                 <main className="main">
-                    <h2>Моя бронь и заказы</h2>
+                    <h2>Заказы пользователя {user}</h2>
 
                     {bookings.map((el: any) => {
                         return (
                             <>
-                                <p className="text-lg">Пользователь: {user}</p>
+                                <p className="text-lg">Пользователь: {filmTemplate(el)}</p>
                                 <p className="text-lg">Дата начала: {dateStartTemplate(el)}</p>
                                 <p className="text-lg">Дата окончания: {dateEndTemplate(el)}</p>
                                 <p className="text-lg">Еда: {foodListBodyTemplate(el)}</p>

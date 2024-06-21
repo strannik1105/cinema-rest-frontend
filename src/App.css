@@ -1,9 +1,12 @@
 body {
     height: 100%;
+    font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .site_content {
-    font-family: Roboto;
     background: #fcf8f3;
     color: #464544;
     display: flex;
@@ -58,8 +61,8 @@ body {
 }
 
 .konvajs-content {
-    background: url("/схема2.png") no-repeat !important;
-    background-size: 500px;
+    background: url("/схема2.jpg") no-repeat  !important;
+    background-size: contain;
 }
 
 #sss {

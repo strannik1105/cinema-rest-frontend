@@ -18,8 +18,18 @@ export const AllMovies = () => {
 
     useEffect(() => {
         axios.get("http://localhost:8001/api/v1/movies/", {params: query})
-            .then(data => setFilms(data.data))
+             .then(data => {
+                data.data.forEach(async (el: any) => {
+                    el["image"] = await drawImage(el.sid).then(data => data.data[0].file)
+                })
+                setTimeout(() => setFilms(data.data), 700)
+
+            })
     }, [query]);
+
+    const drawImage = async (sid: string) => {
+        return axios.get("http://127.0.0.1:8001/api/v1/movies_images/" + sid)
+    }
 
     const [genre, setGenre] = useState()
 
@@ -49,18 +59,18 @@ export const AllMovies = () => {
                     <div className="films">
                         <div className="fiter_form">
                             <p>
-                                <label htmlFor="">Год от</label>
+                                <label className="w-2" htmlFor="">Год от</label>
                                 <InputText value={query.year_gt} keyfilter="int"
-                                           placeholder="Введите год"
+                                           placeholder="Введите год" className="w-full"
                                            onChange={(e) => setQuery({
                                                ...query,
                                                year_gt: Number(e.target.value)
                                            })}/>
                             </p>
                             <p>
-                                <label htmlFor="">Год до</label>
+                                <label className="w-2" htmlFor="">Год до</label>
                                 <InputText value={query.year_lt} keyfilter="int"
-                                           placeholder="Введите год"
+                                           placeholder="Введите год" className="w-full"
                                            onChange={(e) => setQuery({
                                                ...query,
                                                year_lt: Number(e.target.value)
@@ -90,14 +100,14 @@ export const AllMovies = () => {
                                 <Dropdown value={genre}
                                           onChange={(e) => onSelectGenre(e)}
                                           options={genres} optionLabel="name"
-                                          placeholder="Выберите жанр" className="w-full md:w-14rem"/>
+                                          placeholder="Выберите жанр" className="w-full"/>
                             </p>
 
                         </div>
                         {films.map((el: any) => {
                             return (
                                 <div className="film animate__bounce animate__delay-2s">
-                                    <MovieImage sid={el.sid}/>
+                                    <img src={el.image} alt=""/>
                                     <div>
                                         <h2>{el.name}</h2>
                                         <p>{el.description}</p>
