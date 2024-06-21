@@ -12,7 +12,7 @@ import 'primeflex/primeflex.css';
 import "react-toastify/dist/ReactToastify.css";
 import React from "react";
 import {PrimeReactProvider} from "primereact/api";
-import "./App.css";
+
 import {MovieDetail} from "@/pages/movies/show";
 import {RoomsList} from "@/pages/rooms/list";
 import {RoomCreate} from "@/pages/rooms/create";
@@ -50,6 +50,7 @@ import {AllFoods} from "@/pages/main/components/all_food";
 import {UserEdit} from "@/pages/users/edit";
 import {UserCreate} from "@/pages/users/create";
 import {Payment} from "@/pages/main/components/payment";
+import "./App.css";
 
 function App() {
     return (

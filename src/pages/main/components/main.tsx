@@ -1,15 +1,74 @@
 import React, {useEffect, useState} from "react";
-import Carousel from 'react-bootstrap/Carousel';
-import {foods, movies} from "@/pages/main/movies";
 import axios from "axios";
 import {MovieImage} from "@/pages/main/components/movie_image";
 import {Link} from "react-router-dom";
 import {FoodImage} from "@/pages/main/components/food_image";
+import {Carousel} from "primereact/carousel";
 
 export const Main = () => {
 
+    const ProductService = {
+        getProductsData() {
+            return [
+                {
+                    id: '1000',
+                    code: 'f230fh0g3',
+                    name: 'Bamboo Watch',
+                    description: 'Product Description',
+                    image: 'public/1%20(1).jpg',
+                    price: 65,
+                    category: 'Accessories',
+                    quantity: 24,
+                    inventoryStatus: 'INSTOCK',
+                    rating: 5
+                },
+                {
+                    id: '1010',
+                    code: 'f230fh0g3',
+                    name: 'Bamboo Watch',
+                    description: 'Product Description',
+                    image: 'public/2%20(1).jpg',
+                    price: 65,
+                    category: 'Accessories',
+                    quantity: 24,
+                    inventoryStatus: 'INSTOCK',
+                    rating: 5
+                },
+                {
+                    id: '1020',
+                    code: 'f230fh0g3',
+                    name: 'Bamboo Watch',
+                    description: 'Product Description',
+                    image: 'public/3%20(1).jpg',
+                    price: 65,
+                    category: 'Accessories',
+                    quantity: 24,
+                    inventoryStatus: 'INSTOCK',
+                    rating: 5
+                },
+            ]
+        },
+        getProductsMini() {
+            return Promise.resolve(this.getProductsData().slice(0, 3));
+        },
+    }
+
     const [films, setFilms] = useState<any>();
     const [foods, setFoods] = useState<any>();
+
+    const productTemplate = (product: any) => {
+        return (
+            <div>
+                <img src={product.image} alt={product.name} className="h-screen"/>
+            </div>
+        );
+    };
+
+
+    const [products, setProducts] = useState<any>([]);
+    useEffect(() => {
+        ProductService.getProductsMini().then((data) => setProducts(data.slice(0, 3)));
+    }, []);
 
     useEffect(() => {
         axios.get("http://localhost:8001/api/v1/movies/")
@@ -20,27 +79,36 @@ export const Main = () => {
 
     const a = localStorage.getItem("user")
 
+    const responsiveOptions = [
+        {
+            breakpoint: '1400px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '1199px',
+            numVisible: 3,
+            numScroll: 1
+        },
+        {
+            breakpoint: '767px',
+            numVisible: 2,
+            numScroll: 1
+        },
+        {
+            breakpoint: '575px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
+
     return (
         <div className="main__container">
-            <Carousel className="sksk">
-                <Carousel.Item>
-                    <img
-                        src="public/1%20(1).jpg"
-                        alt=""/>
+            <div className="sksk">
+                <Carousel value={products} numScroll={1} numVisible={1} className="h-2rem"
+                      responsiveOptions={responsiveOptions} itemTemplate={productTemplate}/>
+            </div>
 
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        src="public/2%20(1).jpg"
-                        alt=""/>
-
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        src="public/3%20(1).jpg"
-                        alt=""/>
-                </Carousel.Item>
-            </Carousel>
 
             <h1 id="movie">Список фильмов</h1>
             <div className="films">
@@ -54,7 +122,7 @@ export const Main = () => {
                                 <p>Жанр: {el.genre}</p>
                                 <p>Год: {el.year}</p>
                                 <p>Длительность: {el.duration} минут</p>
-                                <Link to={a ? "/booking_rooms" :"/main_login"}>Бронировать</Link>
+                                <Link to={a ? "/booking_rooms" : "/main_login"}>Бронировать</Link>
                             </div>
                         </div>
                     )
@@ -83,7 +151,7 @@ export const Main = () => {
                 </div>
 
                 <div className="more_films">
-                     <Link to="/all_foods">Все блюда</Link>
+                    <Link to="/all_foods">Все блюда</Link>
                 </div>
             </div>
 

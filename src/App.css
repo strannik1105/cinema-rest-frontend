@@ -122,15 +122,16 @@ body {
     width: 100%;
 }
 
-.sksk {
+.sksk img {
     width: 1000px;
     margin: auto;
+    height: 500px !important;
 }
 
-.carousel-item img {
-    aspect-ratio: 16 / 9;
-    width: 1000px;
-    height: 100%;
+.p-carousel-items-container {
+    display: flex;
+    flex-direction: row;
+    height: 500px !important;
 }
 
 .payform-tinkoff {
