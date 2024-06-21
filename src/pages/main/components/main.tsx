@@ -58,8 +58,8 @@ export const Main = () => {
 
     const productTemplate = (product: any) => {
         return (
-            <div>
-                <img src={product.image} alt={product.name} className="h-screen"/>
+            <div className="asdfg">
+                <img src={product.image} alt={product.name} className="w-full shadow-2"/>
             </div>
         );
     };
@@ -105,7 +105,7 @@ export const Main = () => {
     return (
         <div className="main__container">
             <div className="sksk">
-                <Carousel value={products} numScroll={1} numVisible={1} className="h-2rem"
+                <Carousel value={products} numScroll={1} numVisible={1}
                       responsiveOptions={responsiveOptions} itemTemplate={productTemplate}/>
             </div>
 

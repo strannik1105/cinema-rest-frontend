@@ -1,9 +1,9 @@
 body {
     height: 100%;
     font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .site_content {
@@ -61,7 +61,7 @@ body {
 }
 
 .konvajs-content {
-    background: url("/схема2.jpg") no-repeat  !important;
+    background: url("/Skhema.drawio.png") no-repeat;
     background-size: contain;
 }
 
@@ -122,18 +122,6 @@ body {
     width: 100%;
 }
 
-.sksk img {
-    width: 1000px;
-    margin: auto;
-    height: 500px !important;
-}
-
-.p-carousel-items-container {
-    display: flex;
-    flex-direction: row;
-    height: 500px !important;
-}
-
 .payform-tinkoff {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -222,4 +210,8 @@ body {
 .payform-tinkoff-btn:hover {
     background-color: #FAB619;
     border: 1px solid #FAB619;
+}
+
+.asdfg img {
+    height: 600px !important;
 }

@@ -80,7 +80,7 @@ export const BList = () => {
                     {bookings.map((el: any) => {
                         return (
                             <>
-                                <p className="text-lg">Пользователь: {filmTemplate(el)}</p>
+                                <p className="text-lg">Фильм: {filmTemplate(el)}</p>
                                 <p className="text-lg">Дата начала: {dateStartTemplate(el)}</p>
                                 <p className="text-lg">Дата окончания: {dateEndTemplate(el)}</p>
                                 <p className="text-lg">Еда: {foodListBodyTemplate(el)}</p>

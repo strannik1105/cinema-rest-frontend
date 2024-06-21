@@ -34,7 +34,7 @@ export const Booking = () => {
             <main className="main">
                 <div className="booking_container">
                     <h2>Забронируйте комнату прямо сейчас</h2>
-                    <Stage width={600} height={600}>
+                    <Stage width={900} height={700}>
                         <Layer>
                             <Text fontSize={15}/>
                             {
