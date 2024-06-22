@@ -50,9 +50,11 @@ export const Booking = () => {
                                                 fill="#d92929"
                                                 opacity={0.4}
                                             />
-                                            <Text text={el.name} fontSize={15} x={el.x}
-                                                  y={el.y} width={100}
-                                                  height={100}/>
+                                            <Text text={el.name} fontSize={15} x={el.x + 10}
+                                                  y={el.y + 25} width={70}
+                                                  height={70}
+
+                                            />
                                         </div>
 
                                     )
