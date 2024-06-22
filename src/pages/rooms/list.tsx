@@ -23,7 +23,10 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
 
     const saveSubmit = () => {
         rooms.forEach((el: any) => {
-            axios.patch("http://localhost:8001/api/v1/rooms/" + el.sid, el).then(() => console.log("ГОЙДА!!!!!"))
+            axios.patch("http://localhost:8001/api/v1/rooms/" + el.sid, el).then(() =>{
+                 console.log("ГОЙДА!!!!!")
+                console.log(rooms)
+            })
         })
     }
 
@@ -31,18 +34,20 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
         console.log(e)
         const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
         a.isDragging = true;
-         setX(e.target.x())
+        setX(e.target.x())
         setY(e.target.y())
     }
 
     const [x, setX] = useState<any>()
     const [y, setY] = useState<any>()
 
+    console.log(rooms)
+
     const onRoomDragEnd = (e: any) => {
         const a = rooms.find((el: any) => el.sid == e.target.parent?.attrs.id)
         a.isDragging = false;
-        a.x = e.target.x();
-        a.y = e.target.y();
+        a.x = e.target.x() + 200;
+        a.y = e.target.y() - 50;
         setRooms(rooms);
     }
 
@@ -60,7 +65,7 @@ export const RoomsList: React.FC<IResourceComponentsProps> = () => {
                 }
             >
 
-                <Stage width={600} height={600}>
+                <Stage width={900} height={700}>
                     <Layer>
                         {
                             rooms?.map((el: any) => {
